@@ -17,13 +17,12 @@ return [
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
-        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
 
     'ses' => [
         'key' => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
-        'region' => env('SES_REGION', 'us-east-1'),
+        'region' => 'us-east-1',
     ],
 
     'sparkpost' => [
@@ -34,15 +33,6 @@ return [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
-        'webhook' => [
-            'secret' => env('STRIPE_WEBHOOK_SECRET'),
-            'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
-        ],
     ],
-
-    'google' => [
-        'client_id' => '80183121105-4rmv5lu4ngusgkjp3160hmnvmv9j9luo.apps.googleusercontent.com',
-        'client_secret' => 'dV0ajC9Ti1KvOdpP0lDrmpEt',
-        'redirect' => 'http://localhost:8000/callback'],
 
 ];
