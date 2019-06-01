@@ -16,13 +16,13 @@ class UserController extends Controller
     //to make the middleware for only index method
     public function __construct()
     {
-        $this->middleware('admin', ['only' => ['index']]);
+        // $this->middleware('admin', ['only' => ['index']]);
     }
 
     public function index()
     {
-        $users = User::paginate(5);
-        return view('users',['users'=>$users]);
+       
+        return view('home');
     }
 
     /**
@@ -42,8 +42,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    { // validation
+       
     }
 
     /**
@@ -89,9 +89,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-       //
+        // 
     }
-    
 
 
     public function update_user_info(Request $request, $id)
@@ -132,6 +131,31 @@ class UserController extends Controller
         }
 
     }
+
+    public function book_event( Request $reques)
+    {
+        
+        
+    }
+
+    public function cancel_event( Request $reques)
+    {
+        
+        
+    }
+
+    public function review_event( Request $reques)
+    {
+        
+        
+    }
+
+    public function review_company( Request $reques)
+    {
+        
+        
+    }
+
 
     
 }

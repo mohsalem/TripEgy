@@ -1,68 +1,93 @@
-
-    <footer class="container-fluid py-5">
-      <div class="container">
-        <div class="row" style="margin-bottom:0;">
-            <div class="col-md-6" style="margin-bottom:0;">
-              <div class="row" style="margin-bottom:0;">
-                  <div class="col-md-6 ">
-                    <div class="logo-part">
-                        <img src="/imgs/LOGO.png" class="w-50 logo-footer" >
-                        <p>  the leading Volkswagen Enthusiast club in the UAE. </p>
-                        <p> over 200 members and supporting organizer</p>
+<!--footer start-->
+<footer id="footer" class="footer">
+    <div class="container">
+        <div class="footer-menu">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html">trip<span>egy</span></a>
                     </div>
-                  </div>
-                  <div class="col-md-6 px-4">
-                    <h4>OUR EVENTS</h4>
-                    <p>join VDUBZ the club to know more about our events</p>
-                    <a href="#" class="btn-footer"> KNOW MORE  </a><br>
-                    <a href="#" class="btn-footer"> CONTACT US .. </a>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="row" style="margin-bottom:0;">
-                  <div class="col-md-6 px-4">
-                    <h4> ABOUT US</h4>
-                    <div class="row" style="margin-bottom:0;">
-                        <div class="col-md-6">
-                          <ul>
-                              <li> <a href="#"> HOME </a> </li>
-                              <li> <a href="#"> CAREERS </a> </li>
-                              <li> <a href="#"> SERVICES </a> </li>
-                              <li> <a href="#"> HELP </a> </li>
-                          </ul>
-                        </div>
-                        <div class="col-md-6 px-4">
-                          <ul>
-                              <li> <a href="#"> OUR PARTENERS </a> </li>
-                              <li> <a href="#"> TERMS </a> </li>
-                              <li> <a href="#"> EVENTS </a> </li>
-                              <li> <a href="#"> CONTACT US </a> </li>
-                          </ul>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 ">
-                    <h4> SOCIAL MEDIA </h4>
-                    <div class="social">
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                    </div>
-                    <form class="form-footer my-3" method="GET" action="../Search">
-                        <input type="text"  placeholder="Write something here" name="search_input">
-                        <button type="submit">Search</button>
-                    </form>
-
-                  </div>
-              </div>
+                    <!--/.navbar-header-->
+                </div>
+                <div class="col-sm-9">
+                    <ul class="footer-menu-item">
+                        <li class="scroll"><a href="#works">how it works</a></li>
+                        <li class="scroll"><a href="#explore">explore</a></li>
+                        <li class="scroll"><a href="#reviews">review</a></li>
+                        <li class="scroll"><a href="#blog">blog</a></li>
+                        <li class="scroll"><a href="#contact">contact</a></li>
+                        <li class=" scroll"><a href="#contact">my account</a></li>
+                    </ul>
+                    <!--/.nav -->
+                </div>
             </div>
         </div>
-      </div>
-      <div class="feet">
-<h5>© 2017 Mwasalat Misr. All rights reserved | Powered by 
+        <div class="hm-footer-copyright">
+            <div class="row">
+                <div class="col-sm-5">
+                    <p>
+                        &copy;copyright. designed and developed by <a
+                            href="https://www.themesine.com/">themesine</a>
+                    </p>
+                    <!--/p-->
+                </div>
+                <div class="col-sm-7">
+                    <div class="footer-social">
+                        <span><i class="fa fa-phone"> +1 (222) 777 8888</i></span>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+            </div>
 
-    <a href="#">Solid</a></h5>
-      </div>
-    </footer>
-  </body>
+        </div>
+        <!--/.hm-footer-copyright-->
+    </div>
+    <!--/.container-->
+
+    <div id="scroll-Top">
+        <div class="return-to-top">
+            <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
+                data-original-title="Back to Top" aria-hidden="true"></i>
+        </div>
+
+    </div>
+    <!--/.scroll-Top-->
+
+</footer>
+<!--/.footer-->
+<!--footer end-->
+
+<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+<script src="assets/js/jquery.js"></script>
+
+<!--modernizr.min.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+<!--bootstrap.min.js-->
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- bootsnav js -->
+<script src="assets/js/bootsnav.js"></script>
+
+<!--feather.min.js-->
+<script src="assets/js/feather.min.js"></script>
+
+<!-- counter js -->
+<script src="assets/js/jquery.counterup.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+
+<!--slick.min.js-->
+<script src="assets/js/slick.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+<!--Custom JS-->
+<script src="assets/js/custom.js"></script>
+
+</body>
+
 </html>

@@ -33,29 +33,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-    $selected_user = User::where('email',request('email'))->first();
-
-    if ($selected_user->account_status == "active"){
-
-         //check email and pass
-         if(!auth()->attempt(request(['email','password']))){
-            return back()->withErrors([
-               'message'=>'Your email or password is incorrect'
-           ]);
-           }else{ 
-            return redirect('/home');
-           }
-    }else{
-        return back()->withErrors([
-                'message'=>'Your account has been blocked. You can not sign in'
-                ]);;
-    }
-
-
-    }
-
+   
     /**
      * Display the specified resource.
      *
@@ -98,8 +76,33 @@ class LoginController extends Controller
      */
     public function destroy(User $user)
     {
-        // to logout
-        auth()->logout();
-        return redirect('/login');
+         // to logout
+         auth()->logout();
+         return redirect('/login');
     }
-}
+
+
+    public function login(Request $request)
+    {
+    $selected_user = User::where('email',request('email'))->first();
+
+    // if ($selected_user->account_status == "active"){
+
+         //check email and pass
+         if(!auth()->attempt(request(['email','password']))){
+            return back()->withErrors([
+               'message'=>'Your email or password is incorrect'
+           ]);
+           }else{ 
+            return redirect('/');
+           }
+    // }else{
+    //     return back()->withErrors([
+    //             'message'=>'Your account has been blocked. You can not sign in'
+    //             ]);;
+    }
+
+
+    }
+
+

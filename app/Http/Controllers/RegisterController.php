@@ -33,8 +33,8 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function register(Request $request)
+    {  
         // validation
         $this->validate($request,[
             'name'=>'required|max:30|min:4|regex:/(^([a-zA-Z]+)(\d+)?$)/u|unique:users',
@@ -44,18 +44,18 @@ class RegisterController extends Controller
             'gender'=>'required',
             'phone'=>'required|max:15|min:11',
             'birthdate'=>'required|before:today',
-            'user_image'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_image'=>'required',
             ]);
 
           //rename the images files
-          $image = $request->file('user_image'); //holding the inserted image 
-          $newimgname = uniqid().".".$image->getClientOriginalExtension();
+        //   $image = $request->file('user_image'); //holding the inserted image 
+        // //   $newimgname = uniqid().".".$image->getClientOriginalExtension();
 
-          //moving the pic to images folder
-          $image->move(public_path('imgs/uploaded/'),$newimgname);
+        //   //moving the pic to images folder
+        //   $image->move(public_path('imgs/uploaded/'),$newimgname);
 
-          //image path
-          $image_path= '/imgs/uploaded/'.$newimgname;
+        //   //image path
+        //   $image_path= '/imgs/uploaded/'.$newimgname;
   
           // inserting data
           $registereduser = new User;
@@ -65,17 +65,14 @@ class RegisterController extends Controller
           $registereduser->gender = request('gender');
           $registereduser->phone = request('phone');
           $registereduser->birthdate = request('birthdate');
-          $registereduser->account_type = 'user'; //user
-          $registereduser->account_status = 'active'; //active
-          $registereduser->user_image = $image_path;
+          
+        //   $registereduser->user_image = $image_path;
           $registereduser->save();
-           
+          
           //login
           auth()->login($registereduser);
 
-          // return to the view with the success message
-         session()->flash('message','Thank you'. $registereduser->name . ' for join to us');
-         return redirect('/home');
+         return redirect('/');
     }
 
     /**
