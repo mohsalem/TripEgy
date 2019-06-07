@@ -54,8 +54,8 @@ class UserController extends Controller
      */
     public function show($name)
     {
-        $user= User::get()->where('name',$name)->first();
-        return view('profile',['user'=>$user]);
+        // $user= User::get()->where('name',$name)->first();
+        // return view('profile',['user'=>$user]);
     }
 
     /**
@@ -155,6 +155,13 @@ class UserController extends Controller
         
         
     }
+
+    public function search_event( Request $reques)
+    {
+        
+        
+    }
+
 
 
     

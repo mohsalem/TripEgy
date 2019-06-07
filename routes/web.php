@@ -16,7 +16,7 @@ Route::post('/login', 'LoginController@login');
 
 // FOR Company 
 Route::get('/company', 'CompanyController@index');
-Route::post('/show_event', 'CompanyController@show_event');
+Route::post('/get_all_event', 'CompanyController@get_all_event');
 Route::post('/create_event', 'CompanyController@create_event');
 Route::post('/update_event', 'CompanyController@update_event');
 Route::post('/delete_event', 'CompanyController@delete_event');
