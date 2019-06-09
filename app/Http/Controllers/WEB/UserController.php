@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WEB;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\User;
@@ -107,21 +108,21 @@ class UserController extends Controller
         ]);
 
         if (request('user_image')){
-        //rename the images files
-        $image = $request->file('user_image'); //holding the inserted image 
-        $newimgname = uniqid().".".$image->getClientOriginalExtension();
+            //rename the images files
+            $image = $request->file('user_image'); //holding the inserted image 
+            $newimgname = uniqid().".".$image->getClientOriginalExtension();
 
-        //moving the pic to images folder
-        $image->move(public_path('imgs/uploaded/'),$newimgname);
+            //moving the pic to images folder
+            $image->move(public_path('imgs/uploaded/'),$newimgname);
 
-        //image path
-        $image_path= '/imgs/uploaded/'.$newimgname;
+            //image path
+            $image_path= '/imgs/uploaded/'.$newimgname;
 
-        $selected_user = User::find($id);
-        $selected_user->user_image = $image_path;
-        $selected_user->save();
-        session()->flash('message','Information modified successfully');
-        return back();
+            $selected_user = User::find($id);
+            $selected_user->user_image = $image_path;
+            $selected_user->save();
+            session()->flash('message','Information modified successfully');
+            return back();
 
         }else{
             $selected_user = User::find($id);

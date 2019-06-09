@@ -26,7 +26,7 @@ class CreateEventsTable extends Migration
             $table->string('facility');
             $table->string('photo');
             $table->string('max_bookings');
-            $table->boolean('visibility');
+            $table->integer('visibility')->default(1);
             $table->timestamps();
         });
     }

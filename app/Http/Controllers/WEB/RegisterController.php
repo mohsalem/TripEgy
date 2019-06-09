@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WEB;
+use App\Http\Controllers\Controller;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -45,17 +46,20 @@ class RegisterController extends Controller
             'phone'=>'required|max:15|min:11',
             'birthdate'=>'required|before:today',
             'user_image'=>'required',
+            'role'=>'required',
             ]);
+            // dd($request->file('user_image'));
 
-          //rename the images files
-        //   $image = $request->file('user_image'); //holding the inserted image 
-        // //   $newimgname = uniqid().".".$image->getClientOriginalExtension();
-
-        //   //moving the pic to images folder
-        //   $image->move(public_path('imgs/uploaded/'),$newimgname);
-
-        //   //image path
-        //   $image_path= '/imgs/uploaded/'.$newimgname;
+            if($request->file('user_image')  != null){
+                //rename the images files
+                $image = $request->file('user_image'); //holding the inserted image
+                $newimgname = uniqid().".".$image->getClientOriginalExtension();
+    
+                //moving the pic to images folder
+                $image->move('imgs/uploaded/',$newimgname);
+                //image path
+                $image_path= 'imgs/uploaded/'.$newimgname;
+            }
   
           // inserting data
           $registereduser = new User;
@@ -65,9 +69,9 @@ class RegisterController extends Controller
           $registereduser->gender = request('gender');
           $registereduser->phone = request('phone');
           $registereduser->birthdate = request('birthdate');
-          
-        //   $registereduser->user_image = $image_path;
-          $registereduser->save();
+          $registereduser->user_image = $image_path;
+          $registereduser->role = request('role');
+          $registereduser->save();  
           
           //login
           auth()->login($registereduser);

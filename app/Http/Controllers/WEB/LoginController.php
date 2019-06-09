@@ -97,7 +97,7 @@ class LoginController extends Controller
                'message'=>'Your email or password is incorrect'
            ]);
            }else{ 
-            return redirect('/');
+            return redirect('/home1');
            }
     // }else{
     //     return back()->withErrors([

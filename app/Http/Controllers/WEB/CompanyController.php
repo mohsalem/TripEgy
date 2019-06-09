@@ -89,7 +89,10 @@ class CompanyController extends Controller
         //
     }
 
-    public function create_event( Request $reques)
+    public function event_page(){
+        return view('addEvent');
+    }
+    public function create_event(Request $request)
     {
           $this->validate($request,[
             'name'=>'required',
@@ -104,19 +107,17 @@ class CompanyController extends Controller
             // 'photo'=>'required',
                 ]);
 
-        //  dd(request('name'));
+     
+            $company = Company::where('user_id',auth()->user()->id)->first();
+            $comapny_id = $company->id;
+
+
             $requested_company = Event::get()->where('name', request('name'))
-                                              ->where('description', request('description'))
                                               ->where('from', request('from'))
-                                              ->where('to', request('to'))
-                                              ->where('deadline_date', request('deadline_date'))
-                                              ->where('location', request('location'))
-                                              ->where('location_name', request('location_name'))
-                                              ->where('facility', request('facility'))
-                                              //   ->where('photo', request('photo'))
-                                              ->where('max_bookings', request('max_bookings'))->first();
+                                              ->where('to', request('to'))->first();
             if ($requested_company == null){
                 $add_company = new Event;
+                $add_company->company_id = $comapny_id;
                 $add_company->name = request('name');
                 $add_company->description = request('description');
                 $add_company->from = request('from');
@@ -127,14 +128,14 @@ class CompanyController extends Controller
                 $add_company->facility = request('facility');
                 // $add_company->photo = request('photo');
                 $add_company->max_bookings = request('max_bookings');
-                $delete_goal->visibility=1; 
+                $add_company->visibility=1; 
                 $add_company->save();
 
                 // dd(request('name'));
-                flash('success',"The Event has been added successfully");
+                session()->flash('success',"The Event has been added successfully");
                 return back();
             }else{
-                flash('danger',"The Event already exist");
+                session()->flash('danger',"The Event already exist");
                 return back();
             }
 
@@ -155,11 +156,11 @@ class CompanyController extends Controller
             'location_name'=>'required',
             'facility'=>'required',
             'max_bookings'=>'required',
-            // 'photo'=>'required',
+            'photo'=>'required',
     
             ]);
             if ($validation->fails()){
-                 flash('danger','The Event has not been updated successfully');
+                session()->flash('danger','The Event has not been updated successfully');
                 return redirect('/get_all_event');
             }
             $id = request('id');
@@ -172,11 +173,11 @@ class CompanyController extends Controller
             $update_company->location = request('location');
             $update_company->location_name = request('location_name');
             $update_company->facility = request('facility');
-            // $update_company->photo = request('photo');
+            $update_company->photo = request('photo');
             $update_company->max_bookings = request('max_bookings');
             $update_company->save();
     
-            flash('success','The Event has been updated successfully');
+            session()->flash('success','The Event has been updated successfully');
             return redirect('/get_all_event');
     
 
@@ -191,20 +192,18 @@ class CompanyController extends Controller
         if ($validation->fails()){
         return back();
         }
-
         $event = Event::where('id',request('id'))->first();
-
         if($event != null){
         // $delete_event->delete();
-        $id = request('halaqa_id');
-        $delete_event = Halaqa::find($id);
-        $delete_event->is_deleted=0;
+        $id = request('id');
+        $delete_event = Event::find($id);
+        $delete_event->visibility =0;
         $delete_event->save();
         // session()->
-        flash('success','The Event has been deleted successfully');
+        session()->flash('success','The Event has been deleted successfully');
         return back();
         }else{
-        flash('danger','this Event dosent exist');
+        session()->flash('danger','this Event dosent exist');
         return back();
         }
   

@@ -10,24 +10,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['namespace' => 'WEB'], function () {
 
-Route::post('/register', 'RegisterController@register');
-Route::post('/login', 'LoginController@login');
-
-// FOR Company 
-Route::get('/company', 'CompanyController@index');
-Route::post('/get_all_event', 'CompanyController@get_all_event');
-Route::post('/create_event', 'CompanyController@create_event');
-Route::post('/update_event', 'CompanyController@update_event');
-Route::post('/delete_event', 'CompanyController@delete_event');
-
-// FOR User 
-Route::get('/', 'UserController@index');
-Route::post('/update_user_info', 'UserController@update_user_info');
-Route::post('/book_event', 'UserController@book_event');
-Route::post('/cancel_event', 'UserController@cancel_event');
-Route::post('/review_event', 'UserController@review_event');
-Route::post('/review_company', 'UserController@review_company');
+    Route::post('/register', 'RegisterController@register');
+    Route::post('/login', 'LoginController@login');
+    
+    // FOR Company 
+    Route::get('/company', 'CompanyController@index');
+    Route::post('/get_all_event', 'CompanyController@get_all_event');
+    Route::get('/event_page', 'CompanyController@event_page');
+    Route::post('/create_event', 'CompanyController@create_event');
+    Route::post('/update_event', 'CompanyController@update_event');
+    Route::post('/delete_event', 'CompanyController@delete_event');
+    
+    // FOR User 
+    Route::get('/', 'UserController@index');
+    Route::post('/update_user_info', 'UserController@update_user_info');
+    Route::post('/book_event', 'UserController@book_event');
+    Route::post('/cancel_event', 'UserController@cancel_event');
+    Route::post('/review_event', 'UserController@review_event');
+    Route::post('/review_company', 'UserController@review_company');
+});
 
 
 

@@ -36,7 +36,7 @@
             <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
         </form>
 
-        <form action="/register" method="POST" class="form-signup">
+        <form action="/register" method="POST" class="form-signup" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="social-login">
                 <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i>
@@ -68,6 +68,21 @@
                       female
                     </label>
             </div>
+            
+            <label>Role : </label>
+            <div class="radio">
+                    <label for="user">
+                      <input type="radio" name="role" id="user" value="user" checked>
+                      User
+                    </label>
+            </div>
+            <div class="radio">
+                    <label for="company">
+                      <input type="radio" name="role" id="company" value="company">
+                      Company
+                    </label>
+            </div>
+
             <input type="text" id="phone" name="phone" class="form-control" placeholder="phone number" required autofocus="">
             <label for="date">Date of birth </label><input id="date" type="date" class="form-control" name="birthdate" value="{{old('birthdate')}}">
             <label>Profile picture :</label><input type="file" class="form-control" name="user_image" >                        
