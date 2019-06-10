@@ -81,7 +81,7 @@ class LoginController extends Controller
     {
          // to logout
          auth()->logout();
-         return redirect('/login');
+         return redirect('/');
     }
 
 
@@ -97,7 +97,21 @@ class LoginController extends Controller
                'message'=>'Your email or password is incorrect'
            ]);
            }else{ 
-            return redirect('/home1');
+                auth()->login($selected_user);
+            
+                if( $selected_user->role == 'user')
+                {
+                return redirect('/homeofuser');
+                }
+                else if( $selected_user->role == 'company')
+                {
+                return redirect('/homeofcompany');
+                }
+                else
+                {
+                return redirect('/');
+                }  
+            // return redirect('/homeofuser');
            }
     // }else{
     //     return back()->withErrors([

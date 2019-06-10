@@ -22,6 +22,10 @@ class CompanyController extends Controller
        
         return view('company');
     }
+    public function home_page_for_company()
+    {  
+        return view('homeofcompany');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -89,7 +93,7 @@ class CompanyController extends Controller
         //
     }
 
-    public function event_page(){
+    public function creat_event_page(){
         return view('addEvent');
     }
     public function create_event(Request $request)
@@ -141,6 +145,10 @@ class CompanyController extends Controller
 
     }
     
+
+    public function update_event_page(){
+        return view('updateEvent');
+    }
     public function update_event( Request $reques)
     {
          // validation

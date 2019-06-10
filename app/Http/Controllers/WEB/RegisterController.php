@@ -75,8 +75,21 @@ class RegisterController extends Controller
           
           //login
           auth()->login($registereduser);
+          
+          if( $registereduser->role == 'user')
+          {
+            return redirect('/homeofuser');
+          }
+          else if( $registereduser->role == 'company')
+          {
+            return redirect('/homeofcompany');
+          }
+          else
+          {
+            return redirect('/');
+          }  
 
-         return redirect('/');
+
     }
 
     /**

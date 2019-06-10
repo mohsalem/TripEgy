@@ -25,6 +25,12 @@ class UserController extends Controller
        
         return view('home');
     }
+    
+    public function home_page_for_user()
+    {  
+        return view('homeofuser');
+    }
+
 
     /**
      * Show the form for creating a new resource.

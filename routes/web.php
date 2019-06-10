@@ -14,17 +14,27 @@ Route::group(['namespace' => 'WEB'], function () {
 
     Route::post('/register', 'RegisterController@register');
     Route::post('/login', 'LoginController@login');
+    Route::get('logout', 'LoginController@destroy');
     
     // FOR Company 
     Route::get('/company', 'CompanyController@index');
+    Route::get('/homeofcompany', 'CompanyController@home_page_for_company');
+
     Route::post('/get_all_event', 'CompanyController@get_all_event');
-    Route::get('/event_page', 'CompanyController@event_page');
+    
+    Route::get('/creat_event_page', 'CompanyController@creat_event_page');
     Route::post('/create_event', 'CompanyController@create_event');
+   
+    Route::get('/update_event_page', 'CompanyController@update_event_page');
     Route::post('/update_event', 'CompanyController@update_event');
+   
     Route::post('/delete_event', 'CompanyController@delete_event');
     
     // FOR User 
     Route::get('/', 'UserController@index');
+    Route::get('/home', 'UserController@index');
+    Route::get('/homeofuser', 'UserController@home_page_for_user');
+
     Route::post('/update_user_info', 'UserController@update_user_info');
     Route::post('/book_event', 'UserController@book_event');
     Route::post('/cancel_event', 'UserController@cancel_event');
