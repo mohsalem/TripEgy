@@ -17,8 +17,11 @@ class CreateBookingsTable extends Migration
             $table->increments('id');
             $table->integer('event_id');
             $table->integer('user_id');
-            $table->enum('payment_method',array('visa','fawry'));
-            $table->enum('payment_status', array('pending','paid','unpaid'));
+            $table->integer('booked');
+            $table->string('payment_method');
+            // $table->string('payment_status');
+            // $table->enum('payment_method',array('visa','fawry'));
+            // $table->enum('payment_status', array('pending','paid','unpaid'));
             $table->integer('number_of_traviles');
             $table->timestamps();
         });

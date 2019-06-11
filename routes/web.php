@@ -14,7 +14,7 @@ Route::group(['namespace' => 'WEB'], function () {
 
     Route::post('/register', 'RegisterController@register');
     Route::post('/login', 'LoginController@login');
-    Route::get('logout', 'LoginController@destroy');
+    Route::get('/logout', 'LoginController@destroy');
     
     // FOR Company 
     Route::get('/company', 'CompanyController@index');

@@ -19,7 +19,7 @@
 			            <!-- Collect the nav links, forms, and other content for toggling -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">logged in as: </span> hekaaa</a></li>
+			                    <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
 			                    <li class="select-opt" class="head-responsive-right pull-right">
 			                    	<select name="language" id="language">
 										<option value="default">EN</option>

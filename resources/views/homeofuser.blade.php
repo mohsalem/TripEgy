@@ -21,12 +21,15 @@
             </div>
 
             <div class="col-md-9  admin-content" id="profile">
+                {{-- <div class="avatar">
+                    <img alt="" src={{auth()->user()->user_image}}>
+                </div> --}}
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Name</h3>
                     </div>
                     <div class="panel-body">
-                        Ashish Patel
+                        {{auth()->user()->name}}
                     </div>
                 </div>
                 <div class="panel panel-info" style="margin: 1em;">
@@ -34,16 +37,31 @@
                         <h3 class="panel-title">Email</h3>
                     </div>
                     <div class="panel-body">
-                        ashishpatel0720@gmail.com
+                        {{auth()->user()->email}}  {{-- ashishpatel0720@gmail.com --}}
                     </div>
                 </div>
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Last Password Change</h3>
-
+                        <h3 class="panel-title">Phone Number</h3>
                     </div>
                     <div class="panel-body">
-                        4 days Ago
+                        {{auth()->user()->phone}}
+                    </div>
+                </div>
+                <div class="panel panel-info" style="margin: 1em;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Date of birth</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{auth()->user()->birthdate}}
+                    </div>
+                </div>
+                <div class="panel panel-info" style="margin: 1em;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Gender</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{auth()->user()->gender}}
                     </div>
                 </div>
 
@@ -132,15 +150,14 @@
                     </div>
                     <div class="panel-body">
                         Do you really want to logout ?  
-                        <a  href="#" class="label label-danger"
+                        <a href="#" class="label label-danger"
                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                            document.getElementById('logout-form').submit();">
                             <span >   Yes   </span>
                         </a>    
                         <a href="/account" class="label label-success"> <span >  No   </span></a>
                     </div>
-                    <form id="logout-form" action="#" method="POST" style="display: none;">
-                    </form>
+                    <form id="logout-form" action="/logout" method="get" style="display: none;"></form>
 
 
 

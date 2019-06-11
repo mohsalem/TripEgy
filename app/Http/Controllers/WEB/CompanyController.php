@@ -120,20 +120,20 @@ class CompanyController extends Controller
                                               ->where('from', request('from'))
                                               ->where('to', request('to'))->first();
             if ($requested_company == null){
-                $add_company = new Event;
-                $add_company->company_id = $comapny_id;
-                $add_company->name = request('name');
-                $add_company->description = request('description');
-                $add_company->from = request('from');
-                $add_company->to = request('to');
-                $add_company->deadline_date = request('deadline_date');
-                $add_company->location = request('location');
-                $add_company->location_name = request('location_name');
-                $add_company->facility = request('facility');
-                // $add_company->photo = request('photo');
-                $add_company->max_bookings = request('max_bookings');
-                $add_company->visibility=1; 
-                $add_company->save();
+                $add_event = new Event;
+                $add_event->company_id = $comapny_id;
+                $add_event->name = request('name');
+                $add_event->description = request('description');
+                $add_event->from = request('from');
+                $add_event->to = request('to');
+                $add_event->deadline_date = request('deadline_date');
+                $add_event->location = request('location');
+                $add_event->location_name = request('location_name');
+                $add_event->facility = request('facility');
+                // $add_event->photo = request('photo');
+                $add_event->max_bookings = request('max_bookings');
+                $add_event->visibility=1; 
+                $add_event->save();
 
                 // dd(request('name'));
                 session()->flash('success',"The Event has been added successfully");
@@ -172,18 +172,18 @@ class CompanyController extends Controller
                 return redirect('/get_all_event');
             }
             $id = request('id');
-            $update_company = Event::find($id);
-            $update_company->name=request('name');
-            $update_company->description = request('description');
-            $update_company->from = request('from');
-            $update_company->to = request('to');
-            $update_company->deadline_date = request('deadline_date');
-            $update_company->location = request('location');
-            $update_company->location_name = request('location_name');
-            $update_company->facility = request('facility');
-            $update_company->photo = request('photo');
-            $update_company->max_bookings = request('max_bookings');
-            $update_company->save();
+            $update_event = Event::find($id);
+            $update_event->name=request('name');
+            $update_event->description = request('description');
+            $update_event->from = request('from');
+            $update_event->to = request('to');
+            $update_event->deadline_date = request('deadline_date');
+            $update_event->location = request('location');
+            $update_event->location_name = request('location_name');
+            $update_event->facility = request('facility');
+            $update_event->photo = request('photo');
+            $update_event->max_bookings = request('max_bookings');
+            $update_event->save();
     
             session()->flash('success','The Event has been updated successfully');
             return redirect('/get_all_event');
@@ -200,8 +200,8 @@ class CompanyController extends Controller
         if ($validation->fails()){
         return back();
         }
-        $event = Event::where('id',request('id'))->first();
-        if($event != null){
+        $delete_event = Event::where('id',request('id'))->first();
+        if($delete_event != null){
         // $delete_event->delete();
         $id = request('id');
         $delete_event = Event::find($id);

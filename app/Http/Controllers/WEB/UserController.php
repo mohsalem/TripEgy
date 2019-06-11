@@ -5,6 +5,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Event;
+use App\Company;
+use App\Booking;
 
 class UserController extends Controller
 {
@@ -141,13 +144,65 @@ class UserController extends Controller
 
     public function book_event( Request $reques)
     {
+        $this->validate($request,[
+        'payment_method'=>'required',
+        // 'payment_status'=>'required',
+            ]);
+
+        $user = User::where('user_id',auth()->user()->id)->first();
+        $user_id = $user->id;
+        
+        $event = Event::where('id',auth()->user()->id)->first();
+        $event_id = $event->id;
+
+
+        $requested_booking = Book::get()->where('user_id', $user_id)
+                                        ->where('event_id', $event_id);
+
+        if($requested_booking == null){
+            $book_event = new Booking;
+            $book_event->user_id = $user_id;
+            $book_event->event_id = $event_id;
+            $book_event->payment_method = request('payment_method');
+            $book_event->booked=1; 
+            $book_event->number_of_traviles=500000; 
+            $book_event->save();
+
+            // dd(request('name'));
+            session()->flash('success',"The Event has been Booked successfully");
+            return back();
+        }else{
+            session()->flash('danger',"The Event already booked");
+            return back();
+        }
         
         
     }
 
     public function cancel_event( Request $reques)
     {
-        
+        // validation
+        $validation= Validator::make($request->all(),[
+            'id'=>'required',
+            ]);
+            if ($validation->fails()){
+            return back();
+            }
+            $cancel_event = Event::where('id',request('id'))->first();
+            if($cancel_event != null){
+            // $cancel_event->delete();
+            $id = request('id');
+            $cancel_event = Event::find($id);
+            $cancel_event->booked =0;
+            $cancel_event->save();
+            // session()->
+            session()->flash('success','The Event has been unbooked successfully');
+            return back();
+            }else{
+            session()->flash('danger','this Event dosent exist');
+            return back();
+            }
+            
         
     }
 
