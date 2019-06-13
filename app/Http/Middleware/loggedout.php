@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Unlogged
+class loggedout
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,8 @@ class Unlogged
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::check()){
+        if(!Auth::check() )
+        {
             return redirect('/login');
         }
         return $next($request);

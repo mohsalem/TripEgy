@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class Admin
+class company
 {
     /**
      * Handle an incoming request.
@@ -16,7 +15,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        //
-    }
+        if(auth()->user()->role == 'user')
+        {
+            return redirect('/login');
+        }
 
+        return $next($request);
+    }
 }

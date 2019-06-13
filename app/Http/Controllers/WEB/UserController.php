@@ -31,6 +31,7 @@ class UserController extends Controller
     
     public function home_page_for_user()
     {  
+        // dd('hi');
         return view('homeofuser');
     }
 

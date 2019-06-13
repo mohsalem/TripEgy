@@ -18,7 +18,9 @@
 
 			            <!-- Collect the nav links, forms, and other content for toggling -->
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-			                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                        
+                            @if(!Auth::check())
+                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
 			                    <li class="scroll"><a href="" id="signinbtn">sign in</a></li>
 			                    <li class="scroll"><a href="" id="signupbtn">register</a></li>
 			                    <li class="select-opt" class="head-responsive-right pull-right">
@@ -27,15 +29,20 @@
 										<option value="Arabic">AR</option>
 									</select>
 			                    </li>
-			                </ul><!--/.nav -->
-			            </div><!-- /.navbar-collapse -->
+                            </ul><!--/.nav -->
+                            @endif()
+                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                            <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
 			    </nav><!--/nav-->
 			    <!-- End Navigation -->
 			</div><!--/.header-area-->
 		    <div class="clearfix"></div>
 
-
+            
+            @if(! Auth::check())
 		    <section id="login-outer">
     <div id="logreg-forms">
 
@@ -136,7 +143,8 @@
         </div>
         @endif
     </div>
-
-
+    
+    
 </section>
+@endif
 
