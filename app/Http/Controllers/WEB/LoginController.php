@@ -101,7 +101,7 @@ class LoginController extends Controller
             
                 if( $selected_user->role == 'user')
                 {
-                return redirect('/homeofuser');
+                return redirect('/home');
                 }
                 else if( $selected_user->role == 'company')
                 {

@@ -31,9 +31,11 @@
 			                    </li>
                             </ul><!--/.nav -->
                             @endif()
+                            @if(Auth::check())
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
                             </ul>
+                            @endif 
                         </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
 			    </nav><!--/nav-->

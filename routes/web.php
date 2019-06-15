@@ -34,7 +34,8 @@ Route::group(['namespace' => 'WEB'], function () {
     // FOR User 
     Route::get('/', 'UserController@index');
     Route::get('/home', 'UserController@index');
-    Route::get('/homeofuser', 'UserController@home_page_for_user');
+   
+    Route::get('/home', 'UserController@home_page_for_user');
 
     Route::post('/update_user_info', 'UserController@update_user_info');
     Route::post('/book_event', 'UserController@book_event');
