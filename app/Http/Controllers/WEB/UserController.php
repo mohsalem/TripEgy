@@ -219,6 +219,10 @@ class UserController extends Controller
         
     }
 
+    public function search_event_page()
+    {  
+        return view('search');
+    }
     public function search_event( Request $reques)
     {
         

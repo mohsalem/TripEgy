@@ -44,6 +44,7 @@ Route::group(['namespace' => 'WEB'], function () {
     Route::post('/review_company', 'UserController@review_company');
 
     Route::get('/allevent_page', 'CompanyController@allevent_page');
+    Route::get('/search_event_page', 'UserController@search_event_page');
 
 
 
