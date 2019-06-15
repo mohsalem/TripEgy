@@ -93,6 +93,12 @@ class CompanyController extends Controller
         //
     }
 
+    public function event_page(){
+        return view('event');
+    }
+
+
+
     public function creat_event_page(){
         return view('addEvent');
     }
@@ -218,6 +224,9 @@ class CompanyController extends Controller
 
     }
    
+    public function allevent_page(){
+        return view('event');
+    }
     public function get_all_event( Request $reques)
     {
         $company_id = session()->get('company.id');
