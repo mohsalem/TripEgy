@@ -17,8 +17,16 @@ class Loggedin
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            
-            return redirect('/home');
+
+            if(auth()->user()->role == 'company')
+            {
+                return redirect('/homeofcompany');
+            }
+            else
+            {
+                return redirect('/home');
+            }
+                            
         }
         return $next($request);
     }

@@ -29,10 +29,10 @@ class UserController extends Controller
         return view('home');
     }
     
-    public function home_page_for_user()
+    public function profile_user_page()
     {  
         // dd('hi');
-        return view('home');
+        return view('profile');
     }
 
 
@@ -210,12 +210,10 @@ class UserController extends Controller
     public function review_event( Request $reques)
     {
         
-        
     }
 
     public function review_company( Request $reques)
     {
-        
         
     }
 

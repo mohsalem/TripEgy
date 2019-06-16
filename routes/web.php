@@ -13,35 +13,39 @@
 
 Route::group(['namespace' => 'WEB'], function () {
 
+    Route::get('/', 'UserController@index');
+    Route::get('/home', 'UserController@index');
+
     Route::post('/register', 'RegisterController@register')->middleware('loggedin');
     Route::post('/login', 'LoginController@login')->middleware('loggedin');
     Route::get('/logout', 'LoginController@destroy');
     
     // FOR Company 
-    Route::get('/company', 'CompanyController@index');
-    Route::get('/homeofcompany', 'CompanyController@home_page_for_company');
+    Route::get('/company', 'CompanyController@index')->middleware('company');
+    Route::get('/homeofcompany', 'CompanyController@home_page_for_company')->middleware('company');
 
-    Route::post('/get_all_event', 'CompanyController@get_all_event');
+    Route::post('/get_all_event', 'CompanyController@get_all_event')->middleware('company');
     
-    Route::get('/creat_event_page', 'CompanyController@creat_event_page');
-    Route::post('/create_event', 'CompanyController@create_event');
+    Route::get('/creat_event_page', 'CompanyController@creat_event_page')->middleware('company');
+    Route::post('/create_event', 'CompanyController@create_event')->middleware('company');
    
-    Route::get('/update_event_page', 'CompanyController@update_event_page');
-    Route::post('/update_event', 'CompanyController@update_event');
+    Route::get('/update_event_page', 'CompanyController@update_event_page')->middleware('company');
+    Route::post('/update_event', 'CompanyController@update_event')->middleware('company');
    
-    Route::post('/delete_event', 'CompanyController@delete_event');
+    Route::post('/delete_event', 'CompanyController@delete_event')->middleware('company');
     
     // FOR User 
     Route::get('/', 'UserController@index');
     Route::get('/home', 'UserController@index');
    
-    Route::get('/home', 'UserController@home_page_for_user');
+    Route::get('/profile', 'UserController@profile_user_page')->middleware('user');
 
-    Route::post('/update_user_info', 'UserController@update_user_info');
-    Route::post('/book_event', 'UserController@book_event');
-    Route::post('/cancel_event', 'UserController@cancel_event');
-    Route::post('/review_event', 'UserController@review_event');
-    Route::post('/review_company', 'UserController@review_company');
+    Route::post('/update_user_info', 'UserController@update_user_info')->middleware('user');
+    Route::post('/book_event', 'UserController@book_event')->middleware('user');
+    Route::post('/cancel_event', 'UserController@cancel_event')->middleware('user');
+    Route::post('/review_event', 'UserController@review_event')->middleware('user');
+    Route::post('/review_company', 'UserController@review_company')->middleware('user');
+
 
     Route::get('/allevent_page', 'CompanyController@allevent_page');
     Route::get('/search_event_page', 'UserController@search_event_page');
