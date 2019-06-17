@@ -1,4 +1,11 @@
-		<!-- top-area Start -->
+		    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+        <!-- top-area Start -->
 		<section class="top-area">
 			<div class="header-area">
 				<!-- Start Navigation -->
@@ -34,7 +41,15 @@
                             @if(Auth::check())
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
+                            
+                                <li>
+                                        <a href="#" class="">
+                                          <span class="glyphicon glyphicon-log-out"></span> Log out
+                                        </a>
+                                      
+                                </li>
                             </ul>
+
                             @endif 
                         </div><!-- /.navbar-collapse -->
 			        </div><!--/.container-->
