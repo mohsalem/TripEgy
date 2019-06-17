@@ -104,42 +104,72 @@ class UserController extends Controller
     }
 
 
-    public function update_user_info(Request $request, $id)
+    public function update_user_info(Request $request)
     {
         // validation
         $this->validate($request,[
-        'name'=>'nullable|max:30|min:4|regex:/(^([a-zA-Z]+)(\d+)?$)/u|unique:users',
-        'email'=>'max:191|email|unique:users',
-        'password'=>'max:191|min:6|confirmed',
+        'name'=>'nullable|max:30|min:4|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+        'email'=>'max:191|email',
+        'password'=>'max:191|min:6',
         'gender'=>'nullable',
-        'phone'=>'max:15|min:11|numeric',
+        'phone'=>'numeric',
         'birthdate'=>'before:today',
         'user_image'=>'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if (request('user_image')){
-            //rename the images files
-            $image = $request->file('user_image'); //holding the inserted image 
-            $newimgname = uniqid().".".$image->getClientOriginalExtension();
+            $user = User::where('id',auth()->user()->id)->first();
+            $user_id = $user->id;
+            if (request('user_image'))
+            {
+                $image = $request->file('user_image'); //holding the inserted image 
+                $newimgname = uniqid().".".$image->getClientOriginalExtension();
+                $image->move('imgs/uploaded/',$newimgname);
+                $image_path= '/imgs/uploaded/'.$newimgname;
+                $user->user_image = $image_path;
+                $user->save();
 
-            //moving the pic to images folder
-            $image->move(public_path('imgs/uploaded/'),$newimgname);
-
-            //image path
-            $image_path= '/imgs/uploaded/'.$newimgname;
-
-            $selected_user = User::find($id);
-            $selected_user->user_image = $image_path;
-            $selected_user->save();
+            }
+            if (request('name')){
+                $user->name = request('name');
+                $user->save();
+                
+            }
+            if (request('email')){
+                $user->email = request('email');
+                $user->save();
+                
+            }
+            if (request('password')){
+                $user->password = bcrypt(request('password'));
+                $user->save();
+                
+            }
+            if (request('gender')){
+                $user->gender = request('gender');
+                $user->save();
+                
+            }
+            if (request('phone')){
+                $user->phone = request('phone');
+                $user->save();
+                
+            }
+            if(request('birthdate')){
+                $user->birthdate = request('birthdate');
+                $user->save();
+                
+            }
+            // $user->name = request('name');
+            // $user->email = request('email');
+            // $user->password = bcrypt(request('password'));
+            // $user->gender = request('gender');
+            // $user->phone = request('phone');
+            // $user->birthdate = request('birthdate');
+            // $user->save();
+            // $selected_user->update($request->all());
             session()->flash('message','Information modified successfully');
             return back();
-
-        }else{
-            $selected_user = User::find($id);
-            $selected_user->update($request->all());
-            session()->flash('message','Information modified successfully');
-            return back();
-        }
+        // }
 
     }
 
@@ -150,7 +180,7 @@ class UserController extends Controller
         // 'payment_status'=>'required',
             ]);
 
-        $user = User::where('user_id',auth()->user()->id)->first();
+        $user = User::where('id',auth()->user()->id)->first();
         $user_id = $user->id;
         
         $event = Event::where('id',auth()->user()->id)->first();
@@ -209,12 +239,81 @@ class UserController extends Controller
 
     public function review_event( Request $reques)
     {
-        
+        $this->validate($request,[
+            'stars'=>'required',
+            'review'=>'required',
+                ]);
+
+     
+            $user = User::where('id',auth()->user()->id)->first();
+            $user_id = $user->id;
+            $event = Event::where('event_id',auth()->user()->id)->first();
+            $event_id = $event->id;
+            
+
+            $rate_event = RatingEvent::get()->where('stars', request('stars'))
+                                            //   ->where('review', request('review'))->first();
+                                              ->where('user_id',$user_id)->first();
+            if ($rate_event == null){
+                $rate_event = new RatingEvent;
+                $rate_event->event_id = $event_id;
+                $rate_event->user_id = $user_id;
+                $rate_event->stars = request('stars');
+                $rate_event->review = request('review');
+                $rate_event->save();
+
+                // dd(request('stars'));
+                session()->flash('success',"The review has been added successfully");
+                return back();
+            }else{
+                session()->flash('danger',"The review already exist");
+                return back();
+            }
     }
 
     public function review_company( Request $reques)
     {
+        $this->validate($request,[
+            'stars'=>'required',
+            'review'=>'required',
+                ]);
+
+     
+            $user = User::where('id',auth()->user()->id)->first();
+            $user_id = $user->id;
+
+            $company = Company::where('user_id',auth()->user()->id)->first();
+            $comapny_id = $company->id;
+            
+
+            $rate_company = RatingEvent::get()->where('stars', request('stars'))
+                                            //   ->where('review', request('review'))->first();
+                                              ->where('user_id',  $user_id)->first();
+            if ($rate_company == null){
+                $rate_company = new RatingEvent;
+                $rate_company->comapny_id = $comapny_id;
+                $rate_company->user_id = $user_id;
+                $rate_company->stars = request('stars');
+                $rate_company->review = request('review');
+                $rate_company->save();
+
+                // dd(request('stars'));
+                session()->flash('success',"The review has been added successfully");
+                return back();
+            }else{
+                session()->flash('danger',"The review already exist");
+                return back();
+            }
+    }
+    public function show_review_event( Request $reques)
+    {
         
+
+    }
+    public function show_review_company( Request $reques)
+    {
+
+
     }
 
     public function search_event_page()

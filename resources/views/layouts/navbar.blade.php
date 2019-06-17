@@ -40,13 +40,13 @@
                             @endif()
                             @if(Auth::check())
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
+                            <li class=" "><a  href="{{ url('/profile') }}" style="cursor:pointer"><span style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a></li>
                             
                                 <li>
-                                        <a href="#" class="">
-                                          <span class="glyphicon glyphicon-log-out"></span> Log out
-                                        </a>
-                                      
+                                        {{-- <a href="#" class="">
+                                          <span class="glyphicon glyphicon-log-out"></span> "{{ url('/logout') }}" logout 
+                                        </a> --}}
+                                        <a href="{{ url('/logout') }}" class="glyphicon glyphicon-log-out" > logout </a>
                                 </li>
                             </ul>
 
@@ -143,7 +143,7 @@
             </div>
 
             <input type="text" id="phone" name="phone" class="form-control" placeholder="phone number" required autofocus="">
-            <label for="date">Date of birth </label><input id="date" type="date" class="form-control" name="birthdate" value="{{old('birthdate')}}">
+            <label for="date">Date Of Birth </label><input id="date" type="date" class="form-control" name="birthdate" value="{{old('birthdate')}}">
             <label>Profile picture :</label><input type="file" class="form-control" name="user_image" >                        
              
             <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>

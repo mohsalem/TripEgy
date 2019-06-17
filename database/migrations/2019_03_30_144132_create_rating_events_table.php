@@ -18,7 +18,7 @@ class CreateRatingEventsTable extends Migration
             $table->integer('event_id');
             $table->integer('user_id');
             $table->integer('stars');
-            $table->integer('review');
+            $table->string('review');
             $table->timestamps();
         });
     }

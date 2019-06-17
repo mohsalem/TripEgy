@@ -21,9 +21,15 @@
             </div>
 
             <div class="col-md-9  admin-content" id="profile">
-                {{-- <div class="avatar">
-                    <img alt="" src={{auth()->user()->user_image}}>
-                </div> --}}
+                <div class="panel panel-info" style="margin: 1em;">
+                 <div class="panel-heading">
+                  <div style="border-radius: 50%;" >
+                    <div class="avatar" >
+                        <img alt="" src={{auth()->user()->user_image}}>
+                    </div>
+                  </div>
+                 </div>
+                </div>
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Name</h3>
@@ -96,34 +102,114 @@
             </div>
 
             <div class="col-md-9  admin-content" id="update-information">
-                <form action="/update_user_info" method="post">
-
-           
+                <form action="/update_user_info" method="post"  enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    
+                            <div class="panel panel-info" style="margin: 1em;">
+                             <div class="panel-heading">
+                              <div style="border-radius: 50%;" >
+                                <div class="avatar" >
+                                    <img alt="" src={{auth()->user()->user_image}}>
+                                </div>
+                              </div>
+                             </div>
+                            </div>
                     <div class="panel panel-info" style="margin: 1em;">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><label for="new_password" class="control-label panel-title">New Password</label></h3>
+                            <h3 class="panel-title"><label for="user_image" class="control-label panel-title">Chang your profile picture</label></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" name="password" id="new_password" >
+                                    <input type="file" class="form-control" name="user_image" value={{auth()->user()->user_image}}>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="panel panel-info" style="margin: 1em;">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><label for="confirm_password" class="control-label panel-title">Confirm password</label></h3>
+                            <h3 class="panel-title"><label for="name" class="control-label panel-title">Chang your name</label></h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" name="password_confirmation" id="confirm_password" >
+                                    <input type="text" class="form-control" name="name" id="name" value={{auth()->user()->name}}  autofocus="">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="panel panel-info" style="margin: 1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label for="email" class="control-label panel-title">Chang your Email</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" name="email" id="email" value={{auth()->user()->email}} >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" style="margin: 1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label for="password" class="control-label panel-title">Chang your password</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" name="password" id="password" value={{auth()->user()->password }} autofocus="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" style="margin: 1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label for="gender" class="control-label panel-title">Chang your Gender</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <div class="radio">
+                                        <label for="male" value={{auth()->user()->gender}}>
+                                          <input type="radio" name="gender" id="male" value="male" >
+                                          male
+                                        </label>
+                                </div>
+                                <div class="radio">
+                                        <label for="female">
+                                          <input type="radio" name="gender" id="female" value="female">
+                                          female
+                                        </label>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" style="margin: 1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label for="phone" class="control-label panel-title">Chang your Phone number</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="phone" id="phone" value={{auth()->user()->phone}}  autofocus="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" style="margin: 1em;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><label for="birthdate" class="control-label panel-title">Chang your Birth Date</label></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <input id="date" type="date" class="form-control" name="birthdate" value={{auth()->user()->birthdate}} >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
 
            
                     <div class="panel panel-info border" style="margin: 1em;">
@@ -137,6 +223,19 @@
                     </div>
 
                 </form>
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                {{-- for the session messages --}}
+                @if (session()->has('message'))
+                <div class="alert alert-success" role="alert">{{session()->get('message')}}</div>
+                @endif
             </div>
 
             <div class="col-md-9  admin-content" id="settings"></div>
@@ -151,11 +250,17 @@
                         <a href="#" class="label label-danger"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                            <span >   Yes   </span>
+                            <span >   Yes  </span>
+                           <a href= "{{ url('/logout') }}" ></a>
+                            
                         </a>    
-                        <a href="/account" class="label label-success"> <span >  No   </span></a>
+                        <a 
+                        onclick="event.preventDefault();
+                        document.getElementById('notlogout-form').submit();"
+                        href="/login" class="label label-success"> <span >  No   </span><a  href= "{{ url('/login') }}"></a></a>
                     </div>
                     <form id="logout-form" action="/logout" method="get" style="display: none;"></form>
+                    <form id="notlogout-form" action="/login" method="get" style="display: none;"></form>
 
 
 

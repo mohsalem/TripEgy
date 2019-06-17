@@ -122,10 +122,10 @@ class CompanyController extends Controller
             $comapny_id = $company->id;
 
 
-            $requested_company = Event::get()->where('name', request('name'))
+            $requested_event = Event::get()->where('name', request('name'))
                                               ->where('from', request('from'))
                                               ->where('to', request('to'))->first();
-            if ($requested_company == null){
+            if ($requested_event == null){
                 $add_event = new Event;
                 $add_event->company_id = $comapny_id;
                 $add_event->name = request('name');
@@ -239,7 +239,7 @@ class CompanyController extends Controller
             $get_all_event = Event::where('id',session()->get('id') )->where('visibility', 1)->get();
           }
         // $increment = 1;
-        return view('event',['allcompany' => $allcompany, 'get_all_event'=> $get_all_event ] ); 
+        return view('event'); 
 
     } 
     

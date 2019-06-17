@@ -71,12 +71,13 @@ class RegisterController extends Controller
           $registereduser->birthdate = request('birthdate');
           $registereduser->user_image = $image_path;
           $registereduser->role = request('role');
+          $registereduser->visibility =1;
           $registereduser->save();  
           
           //login
-        //   auth()->login($registereduser);
+           auth()->login($registereduser);
           
-          return redirect('/login');
+        return redirect('/login');
           
         //   if( $registereduser->role == 'user')
         //   {
