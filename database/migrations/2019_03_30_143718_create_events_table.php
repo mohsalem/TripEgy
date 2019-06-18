@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('company_id');
+            $table->string('category');
             $table->string('description');
             $table->datetime('from');
             $table->datetime('to');

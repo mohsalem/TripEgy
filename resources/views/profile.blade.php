@@ -21,15 +21,22 @@
             </div>
 
             <div class="col-md-9  admin-content" id="profile">
+
+                <div class="col-lg-12 col-sm-12">
                 <div class="panel panel-info" style="margin: 1em;">
                  <div class="panel-heading">
                   <div style="border-radius: 50%;" >
-                    <div class="avatar" >
-                        <img alt="" src={{auth()->user()->user_image}}>
+                    <div class="cardheader">
+    
+                        <div class="avatar" >
+                            <img alt="" src={{auth()->user()->user_image}}>
+                        </div>
+                     </div>
                     </div>
                   </div>
                  </div>
                 </div>
+                
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Name</h3>
