@@ -16,7 +16,9 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id');
+            // $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->integer('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('booked');
             $table->string('payment_method');
             // $table->string('payment_status');

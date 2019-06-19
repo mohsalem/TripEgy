@@ -9,6 +9,12 @@
 <section id="home" class="welcome-hero">
     <div class="container">
 
+        @if(Auth::check())
+            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
+            </ul>
+        @endif
+
         <div class="welcome-hero-txt">
             <h2>best place to find and explore <br> that all you need </h2>
             <p>
@@ -20,22 +26,26 @@
 
                 <div class="single-welcome-hero-form">
                     <h3>location</h3>
-                    <form action="index.html">
-                        <input type="text" placeholder="Ex: london, newyork, rome" />
-                    </form>
+                    <form action="/search_event" method="POST">
+                        @csrf
+                        <input type="text" name="user_input" placeholder="Ex: london, newyork, rome" />                    
                     <div class="welcome-hero-form-icon">
                         <i class="flaticon-gps-fixed-indicator"></i>
                     </div>
                 </div>
             </div>
             <div class="welcome-hero-serch">
-                <button class="welcome-hero-btn" onclick="window.location.href='#'">
+                <button class="welcome-hero-btn"  type="submit" onclick=" "> 
                     search <i data-feather="search"></i>
                 </button>
+            </form>
             </div>
         </div>
     </div>
-
+{{-- for the session messages --}}
+@if (session()->has('message'))
+<div class="alert alert-success" role="alert">{{session()->get('message')}}</div>
+@endif
 </section>
 <!--/.welcome-hero-->
 <!--welcome-hero end -->

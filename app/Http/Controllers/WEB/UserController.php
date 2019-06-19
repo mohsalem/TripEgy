@@ -305,16 +305,16 @@ class UserController extends Controller
                 return back();
             }
     }
-    public function show_review_event( Request $reques)
-    {
+    // public function show_review_event( Request $reques)
+    // {
         
 
-    }
-    public function show_review_company( Request $reques)
-    {
+    // }
+    // public function show_review_company( Request $reques)
+    // {
 
 
-    }
+    // }
 
     public function search_event_page()
     {  
@@ -322,8 +322,19 @@ class UserController extends Controller
     }
     public function search_event( Request $reques)
     {
-        
-        
+        $input_data = request('user_input');
+
+        if($input_data != ''){
+            $search_results = Event::where('name', 'LIKE', '%' . $input_data . '%')
+            ->orWhere('location_name', 'LIKE', '%' . $input_data . '%')
+            ->orWhere('from', 'LIKE', '%' . $input_data . '%')
+            // ->orWhere('category ', 'LIKE', '%' . $input_data . '%')
+            ->get();
+                return redirect('/search_event_page');
+        }else{
+            return redirect('/home')->with('message','No information has been entered');
+        }
+
     }
 
 

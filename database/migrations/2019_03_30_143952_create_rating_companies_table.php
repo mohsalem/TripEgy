@@ -16,7 +16,9 @@ class CreateRatingCompaniesTable extends Migration
         Schema::create('rating_companies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
+            // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->integer('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('stars');
             $table->string('review');
             $table->timestamps();
