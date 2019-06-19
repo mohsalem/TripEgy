@@ -17,11 +17,11 @@ class CreateCompaniesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('user_id');
-            $table->string('password');
-            $table->string('logo');
-            $table->string('address');
-            $table->integer('mobile_phone');
-            $table->integer('working_hour');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->string('logo');
+            // $table->string('address');
+            // $table->integer('mobile_phone');
+            // $table->integer('working_hour');
             $table->boolean('visibility')->default(1);
             $table->timestamps();
         });

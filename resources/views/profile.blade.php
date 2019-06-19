@@ -22,21 +22,16 @@
 
             <div class="col-md-9  admin-content" id="profile">
 
-                <div class="col-lg-12 col-sm-12">
                 <div class="panel panel-info" style="margin: 1em;">
-                 <div class="panel-heading">
-                  <div style="border-radius: 50%;" >
-                    <div class="cardheader">
-    
-                        <div class="avatar" >
-                            <img alt="" src={{auth()->user()->user_image}}>
-                        </div>
-                     </div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Photo</h3>
                     </div>
-                  </div>
-                 </div>
+                    <div class="panel-body">
+                        <div class="col-xs-12 col-sm-12 col-md-3">
+                            <a href="#" title="{{auth()->user()->name}}" class="thumbnail"><img src={{auth()->user()->user_image}} alt="{{auth()->user()->name}}" /></a>
+                        </div>
+                    </div>
                 </div>
-                
                 <div class="panel panel-info" style="margin: 1em;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Name</h3>
@@ -112,15 +107,17 @@
                 <form action="/update_user_info" method="post"  enctype="multipart/form-data">
                     {{ csrf_field() }}
                     
-                            <div class="panel panel-info" style="margin: 1em;">
-                             <div class="panel-heading">
-                              <div style="border-radius: 50%;" >
-                                <div class="avatar" >
-                                    <img alt="" src={{auth()->user()->user_image}}>
-                                </div>
-                              </div>
-                             </div>
+                    <div class="panel panel-info" style="margin: 1em;">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                
+                                    <div class="col-xs-12 col-sm-12 col-md-3">
+                                        <a href="#" title="{{auth()->user()->name}}" class="thumbnail"><img src={{auth()->user()->user_image}} alt="{{auth()->user()->name}}" /></a>
+                                    </div>
+                                
                             </div>
+                        </div>
+                    </div>
                     <div class="panel panel-info" style="margin: 1em;">
                         <div class="panel-heading">
                             <h3 class="panel-title"><label for="user_image" class="control-label panel-title">Chang your profile picture</label></h3>

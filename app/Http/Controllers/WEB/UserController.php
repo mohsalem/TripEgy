@@ -328,9 +328,9 @@ class UserController extends Controller
             $search_results = Event::where('name', 'LIKE', '%' . $input_data . '%')
             ->orWhere('location_name', 'LIKE', '%' . $input_data . '%')
             ->orWhere('from', 'LIKE', '%' . $input_data . '%')
-            ->orWhere('category ', 'LIKE', '%' . $input_data . '%')
+            // ->orWhere('category ', 'LIKE', '%' . $input_data . '%')
             ->get();
-                return view( "search");
+                return redirect('/search_event_page');
         }else{
             return redirect('/home')->with('message','No information has been entered');
         }
