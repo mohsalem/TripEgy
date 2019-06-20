@@ -9,12 +9,7 @@
 <section id="home" class="welcome-hero">
     <div class="container">
 
-        @if(Auth::check())
-            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="scroll"><a style="cursor:pointer"><span style="text-transform: lowercase; ">{{--logged in as:--}} </span>{{auth()->user()->name}}</a></li>
-            </ul>
-        @endif
-
+  
         <div class="welcome-hero-txt">
             <h2>best place to find and explore <br> that all you need </h2>
             <p>

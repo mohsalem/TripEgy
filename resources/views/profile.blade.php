@@ -28,7 +28,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="col-xs-12 col-sm-12 col-md-3">
-                            <a href="#" title="{{auth()->user()->name}}" class="thumbnail"><img src={{auth()->user()->user_image}} alt="{{auth()->user()->name}}" /></a>
+                            <a href="#" title="{{auth()->user()->name}}" class="img-thumbnail"><img src={{auth()->user()->user_image}} alt="{{auth()->user()->name}}" /></a>
                         </div>
                     </div>
                 </div>
