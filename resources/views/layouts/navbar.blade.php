@@ -40,8 +40,13 @@
                             @endif()
                             @if(Auth::check())
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" "><a  href="{{ url('/profile') }}" style="cursor:pointer"><span style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a></li>
-                            
+                            <li class=" "><a  href="{{ url('/profile') }}" style="cursor:pointer">
+                                <div class="explore-person-img">
+                                <img src="assets/images/explore/person.png" alt="explore person">
+                                {{-- <img src="{{auth()->user()->user_image}}" alt="explore person"> --}}
+                                </div>
+                                <span style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a>
+                            </li>
                                 <li>
                                         {{-- <a href="#" class="">
                                           <span class="glyphicon glyphicon-log-out"></span> "{{ url('/logout') }}" logout 
