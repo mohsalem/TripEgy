@@ -47,12 +47,11 @@
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                             <li class=" "><a  style="cursor:pointer" href="{{ url('/profile') }}" class="" >
                                 
-                                <div class="explore-person-img">
-                                <img src="assets/images/explore/person.png" alt="explore person">
-                                {{-- <img src="{{auth()->user()->user_image}}" alt="explore person"> --}}
-                                </div>
+                                <span >
+                                <img class="explore-person-img" src="{{auth()->user()->user_image}}" alt="explore person">
+                                </span>
                                 <span style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a>
-                                <a href="{{ url('/profile') }}" class="" ></a>
+                              <!----  a d malhash lazma ana sheltaha mebawaza l shakl <a href="{{ url('/profile') }}" class="" ></a> --->
                             </li>
                                 <li>
                                         {{-- <a href="#" class="">
