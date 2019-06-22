@@ -24,22 +24,23 @@ Route::group(['namespace' => 'WEB'], function () {
     Route::get('/logout', 'LoginController@destroy');
     
    
-    Route::group(['middleware' => ['company']], function () {
+    // Route::group(['middleware' => ['company']], function () {
         
         // FOR Company 
         Route::get('/company', 'CompanyController@index');
         Route::get('/homeofcompany', 'CompanyController@home_page_for_company');
         
-        Route::post('/get_all_event', 'CompanyController@get_all_event');
+        // Route::get('/event_page', 'CompanyController@event_page');
+        Route::get('/get_all_event', 'CompanyController@get_all_event');
         
-        Route::get('/creat_event_page', 'CompanyController@creat_event_page');
+        Route::get('/create_event_page', 'CompanyController@create_event_page');
         Route::post('/create_event', 'CompanyController@create_event');
         
         Route::get('/update_event_page', 'CompanyController@update_event_page');
         Route::post('/update_event', 'CompanyController@update_event');
         
         Route::post('/delete_event', 'CompanyController@delete_event');
-    });
+    // });
         
     
     // FOR User 

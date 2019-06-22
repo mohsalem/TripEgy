@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App;
 use App\Company;
 use App\Event;
+use App\User;
+use App\RatingCompany;
 use Validator;
 
 
@@ -24,7 +26,10 @@ class CompanyController extends Controller
     }
     public function home_page_for_company()
     {  
-        return view('homeofcompany');
+        $array1=Event::get();
+        $array2=RatingCompany::get();
+        return view('homeofcompany',['array1'=>$array1],['array2'=>$array2]);
+
     }
 
     /**
@@ -93,19 +98,15 @@ class CompanyController extends Controller
         //
     }
 
-    public function event_page(){
-        return view('event');
-    }
 
-
-
-    public function creat_event_page(){
+    public function create_event_page(){
         return view('addEvent');
     }
     public function create_event(Request $request)
     {
           $this->validate($request,[
             'name'=>'required',
+            'category'=>'required',
             'description'=>'required',
             'from'=>'required',
             'to'=>'required',
@@ -114,21 +115,35 @@ class CompanyController extends Controller
             'location_name'=>'required',
             'facility'=>'required',
             'max_bookings'=>'required',
-            // 'photo'=>'required',
+            'photo'=>'required',
                 ]);
 
      
-            $company = Company::where('user_id',auth()->user()->id)->first();
+            $company = User::where('id',auth()->user()->id)->first();
             $comapny_id = $company->id;
 
+            // if(auth()->user()->role == 'company')
+            // {
+            //     $comapny_id = $company->id;
+
+            // }
+            // dd($comapny_id);
 
             $requested_event = Event::get()->where('name', request('name'))
                                               ->where('from', request('from'))
                                               ->where('to', request('to'))->first();
             if ($requested_event == null){
+                
                 $add_event = new Event;
+                    $image = $request->file('photo'); //holding the inserted image 
+                    $newimgname = uniqid().".".$image->getClientOriginalExtension();
+                    $image->move('imgs/uploaded/',$newimgname);
+                    $image_path= '/imgs/uploaded/'.$newimgname;
+                $add_event->photo = $image_path;
+                // $add_event->save();
                 $add_event->company_id = $comapny_id;
                 $add_event->name = request('name');
+                $add_event->category = request('category');
                 $add_event->description = request('description');
                 $add_event->from = request('from');
                 $add_event->to = request('to');
@@ -160,7 +175,6 @@ class CompanyController extends Controller
          // validation
          $validation= Validator::make($request->all(),[
             
-            'id'=>'required',
             'name'=>'required',
             'description'=>'required',
             'from'=>'required',
@@ -177,8 +191,12 @@ class CompanyController extends Controller
                 session()->flash('danger','The Event has not been updated successfully');
                 return redirect('/get_all_event');
             }
-            $id = request('id');
-            $update_event = Event::find($id);
+
+            $event = Event::where('id',auth()->user()->id)->first();
+            $event_id = $event->id;
+
+            // $id = request('id');
+            // $update_event = Event::find($id);
             $update_event->name=request('name');
             $update_event->description = request('description');
             $update_event->from = request('from');
@@ -224,13 +242,16 @@ class CompanyController extends Controller
 
     }
    
-    public function allevent_page(){
-        return view('event');
-    }
+    // public function event_page(){
+    //     return view('event');
+    // }
+    // public function allevent_page(){
+    //     return view('event');
+    // }
     public function get_all_event( Request $reques)
     {
-        $company_id = session()->get('company.id');
-        $allcompany = Company::where('company_id', $company_id)
+        $company_id = session()->get('user.id');
+        $allcompany =User::where('id', $id)
         ->where('visibility', 1)->get();
         $get_all_event=[];
         // var_dump($allahalaqat);

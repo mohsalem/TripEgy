@@ -17,8 +17,13 @@
 			            <div class="navbar-header">
 			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
 			                    <i class="fa fa-bars"></i>
-			                </button>
-			                <a class="navbar-brand" href="{{url('/home')}}">trip<span>egy</span></a>
+                            </button>
+                            {{-- @if( auth()->user()->role =='company')
+                                <a class="navbar-brand" href="{{url('/homeofcompany')}}">trip<span>egy</span></a>
+                            @else --}}
+                                <a class="navbar-brand" href="{{url('/home')}}">trip<span>egy</span></a>
+                            {{-- @endif --}}
+			                
 
 			            </div><!--/.navbar-header-->
 			            <!-- End Header Navigation -->
@@ -40,12 +45,14 @@
                             @endif()
                             @if(Auth::check())
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" "><a  href="{{ url('/profile') }}" style="cursor:pointer">
+                            <li class=" "><a  style="cursor:pointer" href="{{ url('/profile') }}" class="" >
+                                
                                 <div class="explore-person-img">
                                 <img src="assets/images/explore/person.png" alt="explore person">
                                 {{-- <img src="{{auth()->user()->user_image}}" alt="explore person"> --}}
                                 </div>
                                 <span style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a>
+                                <a href="{{ url('/profile') }}" class="" ></a>
                             </li>
                                 <li>
                                         {{-- <a href="#" class="">

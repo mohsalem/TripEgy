@@ -20,9 +20,9 @@ class CreateEventsTable extends Migration
             // $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->string('category');
             $table->string('description');
-            $table->datetime('from');
-            $table->datetime('to');
-            $table->datetime('deadline_date');
+            $table->date('from');
+            $table->date('to');
+            $table->date('deadline_date');
             $table->string('location');
             $table->string('location_name');
             $table->string('facility');

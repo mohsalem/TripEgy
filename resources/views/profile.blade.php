@@ -14,7 +14,7 @@
             <div class="col-md-3">
                 <ul class="nav nav-pills nav-stacked admin-menu" >
                     <li class="active"><a href="" data-target-id="profile"><i class="glyphicon glyphicon-user"></i> Profile</a></li>
-                    <li><a href="" data-target-id="update-information"><i class="glyphicon glyphicon-lock"></i> update information</a></li>
+                    <li><a href="" data-target-id="update-information"><i class="glyphicon glyphicon-file"></i> update information</a></li>
                     <li><a href="" data-target-id="settings"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
                     <li><a href="" data-target-id="logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
                 </ul>

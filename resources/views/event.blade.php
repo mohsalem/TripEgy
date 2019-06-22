@@ -1,4 +1,4 @@
-@extends('index')
+{{-- @extends('index')
 @section('content')
 
 
@@ -100,7 +100,9 @@ padding-right: 1.1rem;
 
             <button id="image-gallery-button" type="button" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-plus"></i>
-                Add event
+                <a href ="{{url('/create_event_page')}}" Add event>
+                    Add event
+                </a>
             </button>
 
             <button id="image-gallery-button" type="button" class="btn btn-primary btn-lg">
@@ -162,4 +164,4 @@ img:hover {
 
 
 
-@endsection
+@endsection --}}

@@ -25,8 +25,8 @@ class UserController extends Controller
 
     public function index()
     {
-       
-        return view('home');
+        $array1=Event::get();
+        return view('home',['array1'=> $array1]);
     }
     
     public function profile_user_page()
@@ -196,7 +196,7 @@ class UserController extends Controller
             $book_event->event_id = $event_id;
             $book_event->payment_method = request('payment_method');
             $book_event->booked=1; 
-            $book_event->number_of_traviles=500000; 
+            $book_event->number_of_traviles=18; 
             $book_event->save();
 
             // dd(request('name'));
@@ -282,8 +282,12 @@ class UserController extends Controller
             $user = User::where('id',auth()->user()->id)->first();
             $user_id = $user->id;
 
-            $company = Company::where('user_id',auth()->user()->id)->first();
-            $comapny_id = $company->id;
+            $company = User::where('id',auth()->user()->id)->first();
+            if(auth()->user()->role == 'company')
+            {
+                $comapny_id = $company->id;
+
+            }
             
 
             $rate_company = RatingEvent::get()->where('stars', request('stars'))
