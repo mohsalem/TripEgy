@@ -330,12 +330,20 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"Professi
                           <div class="col-md-3"></div>
                       <div class="panel panel-info col-md-6" >
                           <div class="panel-heading">
-                              <h3 class="panel-title"><label for="birthdate" class="control-label panel-title">Add location name for Event</label></h3>
+                              <h3 class="panel-title"><label for="birthdate" class="control-label panel-title">Add location name for Event (latlng) </label></h3>
                           </div>
                           <div class="panel-body">
                               <div class="form-group">
                                   <div class="col-sm-10">
-                                      <input type="text" class="form-control" name="location_name"  id="location_name" >
+                                      <select class="form-control" name="location_name"  id="location_name" >
+                                          <option value="30,31">cairo</option>
+                                          <option value="30.0169184,31.2596836">giza</option>
+                                          <option value="24.0923728,32.9176158">aswan</option>
+                                          <option value="25.6950143,32.6944865">Luxor</option>
+                                          {{-- <option value="30,31">hurgada</option> --}}
+                                          <option value="29.3109329,30.8597961">Fayoum</option>
+                                         
+                                      </select>
                                   </div>
                               </div>
                           </div>
@@ -371,6 +379,9 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"Professi
                           </div>
                       </div>
                       </div>
+
+                      
+
                       <div class="row">
                           <div class="col-md-3"></div>
                       <div class=" col-md-6 border" >

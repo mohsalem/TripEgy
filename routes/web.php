@@ -19,7 +19,10 @@ Route::group(['namespace' => 'WEB'], function () {
         Route::post('/login', 'LoginController@login');
         Route::get('/login', 'LoginController@login');
     });
-
+    // Route::get('/book_event', 'UserController@book_event');
+    Route::post('/book_event', 'UserController@book_event');
+    
+    Route::get('/myevent', 'UserController@myevent');
     Route::get('/', 'UserController@index');
     Route::get('/logout', 'LoginController@destroy');
     
@@ -29,6 +32,7 @@ Route::group(['namespace' => 'WEB'], function () {
         // FOR Company 
         Route::get('/company', 'CompanyController@index');
         Route::get('/homeofcompany', 'CompanyController@home_page_for_company');
+        Route::get('/map/{latlng?}', 'CompanyController@map');
         
         // Route::get('/event_page', 'CompanyController@event_page');
         Route::get('/get_all_event', 'CompanyController@get_all_event');
@@ -41,22 +45,21 @@ Route::group(['namespace' => 'WEB'], function () {
         
         Route::get('/delete_event', 'CompanyController@delete_event');
         Route::post('/delete_event', 'CompanyController@delete_event');
-    // });
+        // });
         
-    
-    // FOR User 
-    // Route::group(['middleware' => ['user']], function () {
-       
+        
+        // FOR User 
+        // Route::group(['middleware' => ['user']], function () {
+            
+        Route::post('/home', 'UserController@index');
         Route::get('/home', 'UserController@index');
         Route::get('/profile', 'UserController@profile_user_page');
         Route::post('/update_user_info', 'UserController@update_user_info');
-        Route::get('/book_event', 'UserController@book_event');
-        Route::post('/book_event', 'UserController@book_event');
         Route::post('/cancel_event', 'UserController@cancel_event');
         Route::post('/review_event', 'UserController@review_event');
+        // Route::get('/review_event', 'UserController@review_event');
         Route::post('/review_company', 'UserController@review_company');
-        Route::get('/show_review_event', 'UserController@show_review_event');
-        Route::get('/show_review_company', 'UserController@show_review_company') ;
+
     // });
 
 

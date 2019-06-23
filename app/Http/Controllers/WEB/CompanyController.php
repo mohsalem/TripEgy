@@ -7,7 +7,7 @@ use App;
 use App\Company;
 use App\Event;
 use App\User;
-use App\RatingCompany;
+use App\RatingEvent;
 use Validator;
 
 
@@ -27,8 +27,8 @@ class CompanyController extends Controller
     public function home_page_for_company()
     {  
         $array1=Event::where('visibility', 1 )->get();
-        $array2=RatingCompany::get();
-        return view('homeofcompany',['array1'=>$array1],['array2'=>$array2]);
+        $reviews=RatingEvent::join('users', 'users.id', 'rating_events.user_id')->get();
+        return view('homeofcompany',['array1'=>$array1 ,'reviews'=>$reviews]);
 
     }
 
@@ -99,6 +99,11 @@ class CompanyController extends Controller
     }
 
 
+    public function map($latlng){
+       $lat=explode(",", $latlng)[0];
+       $lng=explode(",", $latlng)[1];
+        return view('map',["lat"=>$lat,"lng"=>$lng]);
+    }
     public function create_event_page(){
         return view('addEvent');
     }
@@ -116,6 +121,7 @@ class CompanyController extends Controller
             'facility'=>'required',
             'max_bookings'=>'required',
             'photo'=>'required',
+
                 ]);
 
      

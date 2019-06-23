@@ -4,10 +4,12 @@ namespace App\Http\Controllers\WEB;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Validator;
 use App\User;
 use App\Event;
 use App\Company;
 use App\Booking;
+use App\RatingEvent;
 
 class UserController extends Controller
 {
@@ -26,7 +28,10 @@ class UserController extends Controller
     public function index()
     {
         $array1=Event::get();
-        return view('home',['array1'=> $array1]);
+        $reviews=RatingEvent::join('users', 'users.id', 'rating_events.user_id')
+        ->get();
+    // dd($reviews);
+        return view('home',['array1'=> $array1, 'reviews'=>$reviews]);
     }
     
     public function profile_user_page()
@@ -175,80 +180,120 @@ class UserController extends Controller
 
     public function book_event( Request $request)
     {
-        $this->validate($request,[
-        'id'=>'required',
-        // 'payment_status'=>'required',
-            ]);
+        // dd( $request);
+        // $this->validate($request,[
+        // 'id'=>'required',
+        // // 'payment_status'=>'required',
+        //     ]);
+        if(auth()->user()){
+            $user = User::where('id',auth()->user()->id)->first();
+            $user_id = $user->id;
+            
+            $event = Event::where('id',request('id'))->first();
+            // dd( $event);
+            $event_id = $event->id;
 
-        $user = User::where('id',auth()->user()->id)->first();
-        $user_id = $user->id;
-        
-        $event = Event::where('id',auth()->user()->id)->first();
-        $event_id = $event->id;
 
-
-        $requested_booking = Book::get()->where('user_id', $user_id)
-                                        ->where('event_id', $event_id);
-
-        if($requested_booking == null){
-            $book_event = new Booking;
-            $book_event->user_id = $user_id;
-            $book_event->event_id = $event_id;
-            // $book_event->payment_method = request('payment_method');
-            $book_event->booked=1; 
-            $book_event->number_of_traviles=18; 
-            $book_event->save();
-
-            // dd(request('name'));
-            session()->flash('success',"The Event has been Booked successfully");
-            return back();
+            $requested_booking = Booking::get()->where('user_id', $user_id)
+                                        ->where('event_id', $event_id)->first();
+                                        // dd($requested_booking);
+            if($requested_booking == null){
+                $book_event = new Booking;
+                $book_event->user_id = $user_id;
+                $book_event->event_id = $event_id;
+                // $book_event->payment_method = request('payment_method');
+                $book_event->booked=1; 
+                $book_event->number_of_traviles=18; 
+                $book_event->save();
+                session()->flash('success',"The Event has been Booked successfully");
+                return redirect('/home');
+                // dd('jjjj');
+                // return back();
+            }else{
+                session()->flash('danger',"The Event already booked");
+                return redirect('/home');
+                // return back();
+            }
         }else{
-            session()->flash('danger',"The Event already booked");
-            return back();
+            return redirect("/login");
+        }
+        
+        
+        
+    }
+    public function cancel_event( Request $request)
+    {
+        if(auth()->user()){
+            $user = User::where('id',auth()->user()->id)->first();
+            $user_id = $user->id;
+            
+            $event = Event::where('id',request('id'))->first();
+            // dd( $event);
+            $event_id = $event->id;
+
+
+            $book_event = Booking::get()->where('user_id', $user_id)
+                                        ->where('event_id', $event_id)->first();
+                                        //  dd($requested_booking);
+            if($book_event != null){
+               
+                $book_event->user_id = $user_id;
+                $book_event->event_id = $event_id;
+                // $book_event->payment_method = request('payment_method');
+                $book_event->booked=0; 
+                $book_event->number_of_traviles=18; 
+                $book_event->save();
+                session()->flash('success',"The Event has been Booked successfully");
+                return redirect('/home');
+                // dd('jjjj');
+                // return back();
+            }else{
+                session()->flash('danger',"The Event already booked");
+                return redirect('/home');
+                // return back();
+            }
+        }else{
+            return redirect("/login");
         }
         
         
     }
+    
+    public function myevent(){
+        $array1=Event::join('bookings', 'events.id', 'bookings.event_id')
+        ->where('bookings.user_id', auth()->user()->id)
+        ->select( 'events.id as id','events.name as name' ,'events.company_id as company_id',
+        'events.category as category','events.description as description','events.from as from',
+        'events.to as to','events.deadline_date as deadline_date','events.location as location',
+        'events.location_name as location_name','events.facility as facility','events.photo as photo',
+        'events.max_bookings as max_bookings', 
+        'bookings.id as id ','bookings.event_id as event_id ','bookings.user_id as user_id ',
+        'bookings.booked as booked ','bookings.number_of_traviles as number_of_traviles '
+        )
+        ->where('visibility', 1)
+        ->where('bookings.booked', 1)
+        ->get();
+        // dd($array1);
+        return view('myevent',['array1'=> $array1]);    }
+    
 
-    public function cancel_event( Request $request)
-    {
-        // validation
-        $validation= Validator::make($request->all(),[
-            'id'=>'required',
-            ]);
-            if ($validation->fails()){
-            return back();
-            }
-            $cancel_event = Event::where('id',request('id'))->first();
-            if($cancel_event != null){
-            // $cancel_event->delete();
-            $id = request('id');
-            $cancel_event = Event::find($id);
-            $cancel_event->booked =0;
-            $cancel_event->save();
-            // session()->
-            session()->flash('success','The Event has been unbooked successfully');
-            return back();
-            }else{
-            session()->flash('danger','this Event dosent exist');
-            return back();
-            }
-            
-        
-    }
-
-    public function review_event( Request $reques)
-    {
+    public function review_event( Request $request)
+    { 
+        // dd('dffvxvc');
         $this->validate($request,[
+            
+            'event_id'=>' ',
             'stars'=>'required',
             'review'=>'required',
                 ]);
 
-     
+            $event = Event::where('id', request('event_id'))->first();
+            // dd( $event );
+            $event_id = $event->id;
+
             $user = User::where('id',auth()->user()->id)->first();
             $user_id = $user->id;
-            $event = Event::where('event_id',auth()->user()->id)->first();
-            $event_id = $event->id;
+            
             
 
             $rate_event = RatingEvent::get()->where('stars', request('stars'))
@@ -320,10 +365,7 @@ class UserController extends Controller
 
     // }
 
-    public function search_event_page()
-    {   $array1=Event::where('visibility', 1 )->get();
-        return view('search',['array1'=>$array1]);
-    }
+   
     public function search_event( Request $reques)
     {
         $input_data = request('user_input');
@@ -332,9 +374,11 @@ class UserController extends Controller
             $search_results = Event::where('name', 'LIKE', '%' . $input_data . '%')
             ->orWhere('location_name', 'LIKE', '%' . $input_data . '%')
             ->orWhere('from', 'LIKE', '%' . $input_data . '%')
+            ->orWhere('facility', 'LIKE', '%' . $input_data . '%')
+            ->Where('visibility', 1 )
             // ->orWhere('category ', 'LIKE', '%' . $input_data . '%')
             ->get();
-                return redirect('/search_event_page');
+            return view('search',['array1'=>$search_results]);
         }else{
             return redirect('/home')->with('message','No information has been entered');
         }

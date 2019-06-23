@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class user
 {
@@ -15,10 +16,14 @@ class user
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->role == 'company')
-        {
-            return redirect('/login');
+        // dd(auth()->user());
+        // if(null){
+            if(Auth::check()){
+            if(auth()->user()->role != 'company' )
+            {
+                return redirect('/login');
+            }
+            return $next($request);
         }
-        return $next($request);
     }
 }

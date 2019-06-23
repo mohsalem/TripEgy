@@ -183,7 +183,7 @@
                 <div class=" col-md-4 col-sm-6">
                     <div class="single-explore-item">
                         <div class="single-explore-img">
-                            <img src="{{$item->photo}}" alt="{{$item->name}}">
+                            <img src="{{$item->photo}}" alt="{{$item->name}}" style="width:400px;height:300px">
                             <div class="single-explore-img-info">
                                 <button onclick="window.location.href='#'">best rated</button>
                                 <div class="single-explore-image-icon-box">
@@ -207,7 +207,7 @@
                             <br>
                                 {{-- <a href="#"> 10 ratings</a> --}}
                                 <ul class="meta-search">
-                                        <li><i class="glyphicon glyphicon-map-marker danger"></i><strong class="text-danger"> location</strong><span> {{$item->location}} </span></li>
+                                        <li><a href="/map/{{$item->location_name}}"><i class="glyphicon glyphicon-map-marker danger"></i><strong class="text-danger"> location</strong><span> {{$item->location}} </span></a></li>
                                         <li><i class="glyphicon glyphicon-calendar danger"></i><strong class="text-danger"> From </strong><span>{{$item->from}}</span></li>
                                         <li><i class="glyphicon glyphicon-calendar danger"></i><strong class="text-danger"> To </strong><span>{{$item->to}} </span></li>
                                         <li><i class="glyphicon glyphicon-calendar danger"></i><strong class="text-danger"> Deadline </strong><span>{{$item->deadline_date}} </span></li>
@@ -237,7 +237,12 @@
                                 <div class="row">
                                     <div class="col-sm-5">
                                     <a>
-                                        <button class="close-btn" onclick="window.location.href='#'">Book now</button>
+                                        {{-- <button class="close-btn" onclick="window.location.href='#'">Book now</button> --}}
+                                        <form action="/book_event" method="POST">	
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$item->id}}">
+                                            <button type="submit" class="btn close-btn">Book now</button>
+                                        </form>				
                                     </a> 
                                             </div>
                                             <div class="col-sm-7">
@@ -253,351 +258,6 @@
                             </div>
                         </div>
                         @endforeach
-                {{-- <div class="col-md-4 col-sm-6">
-                    <div class="single-explore-item">
-                        <div class="single-explore-img">
-                            <img src="assets/images/explore/e2.jpg" alt="explore image">
-                            <div class="single-explore-img-info">
-                                <button onclick="window.location.href='#'">featured</button>
-                                <div class="single-explore-image-icon-box">
-                                    <ul>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-arrows-alt"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-bookmark-o"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> --}}
-                        {{-- </div>
-                        <div class="single-explore-txt bg-theme-2">
-                            <h2><a href="#">swim and dine resort</a></h2>
-                            <p class="explore-rating-price">
-                                <span class="explore-rating">4.5</span>
-                                <a href="#"> 8 ratings</a>
-                                <span class="explore-price-box">
-                                    form
-                                    <span class="explore-price">50$-500$</span>
-                                </span>
-                                <a href="#">hotel</a>
-                            </p>
-                            <div class="explore-person">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="explore-person-img">
-                                            <a href="#">
-                                                <img src="assets/images/explore/person.png" alt="explore person">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incid ut labore et dolore magna aliqua....
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="explore-open-close-part">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <button class="close-btn open-btn" onclick="window.location.href='#'">open
-                                            now</button>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="explore-map-icon">
-                                            <a href="#"><i data-feather="map-pin"></i></a>
-                                            <a href="#"><i data-feather="upload"></i></a>
-                                            <a href="#"><i data-feather="heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-explore-item">
-                        <div class="single-explore-img">
-                            <img src="assets/images/explore/e3.jpg" alt="explore image">
-                            <div class="single-explore-img-info">
-                                <button onclick="window.location.href='#'">best rated</button>
-                                <div class="single-explore-image-icon-box">
-                                    <ul>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-arrows-alt"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-bookmark-o"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-explore-txt bg-theme-3">
-                            <h2><a href="#">europe tour</a></h2>
-                            <p class="explore-rating-price">
-                                <span class="explore-rating">5.0</span>
-                                <a href="#"> 15 ratings</a>
-                                <span class="explore-price-box">
-                                    form
-                                    <span class="explore-price">5k$-10k$</span>
-                                </span>
-                                <a href="#">destination</a>
-                            </p>
-                            <div class="explore-person">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="explore-person-img">
-                                            <a href="#">
-                                                <img src="assets/images/explore/person.png" alt="explore person">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incid ut labore et dolore magna aliqua....
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="explore-open-close-part">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <button class="close-btn" onclick="window.location.href='#'">close
-                                            now</button>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="explore-map-icon">
-                                            <a href="#"><i data-feather="map-pin"></i></a>
-                                            <a href="#"><i data-feather="upload"></i></a>
-                                            <a href="#"><i data-feather="heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-md-4 col-sm-6">
-                    <div class="single-explore-item">
-                        <div class="single-explore-img">
-                            <img src="assets/images/explore/e4.jpg" alt="explore image">
-                            <div class="single-explore-img-info">
-                                <button onclick="window.location.href='#'">most view</button>
-                                <div class="single-explore-image-icon-box">
-                                    <ul>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-arrows-alt"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-bookmark-o"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-explore-txt bg-theme-4">
-                            <h2><a href="#">banglow with swiming pool</a></h2>
-                            <p class="explore-rating-price">
-                                <span class="explore-rating">5.0</span>
-                                <a href="#"> 10 ratings</a>
-                                <span class="explore-price-box">
-                                    form
-                                    <span class="explore-price">10k$-15k$</span>
-                                </span>
-                                <a href="#">real estate</a>
-                            </p>
-                            <div class="explore-person">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="explore-person-img">
-                                            <a href="#">
-                                                <img src="assets/images/explore/person.png" alt="explore person">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incid ut labore et dolore magna aliqua....
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="explore-open-close-part">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <button class="close-btn" onclick="window.location.href='#'">close
-                                            now</button>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="explore-map-icon">
-                                            <a href="#"><i data-feather="map-pin"></i></a>
-                                            <a href="#"><i data-feather="upload"></i></a>
-                                            <a href="#"><i data-feather="heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-explore-item">
-                        <div class="single-explore-img">
-                            <img src="assets/images/explore/e5.jpg" alt="explore image">
-                            <div class="single-explore-img-info">
-                                <button onclick="window.location.href='#'">featured</button>
-                                <div class="single-explore-image-icon-box">
-                                    <ul>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-arrows-alt"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-bookmark-o"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-explore-txt bg-theme-2">
-                            <h2><a href="#">vintage car expo</a></h2>
-                            <p class="explore-rating-price">
-                                <span class="explore-rating">4.2</span>
-                                <a href="#"> 8 ratings</a>
-                                <span class="explore-price-box">
-                                    form
-                                    <span class="explore-price">500$-1200$</span>
-                                </span>
-                                <a href="#">automotion</a>
-                            </p>
-                            <div class="explore-person">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="explore-person-img">
-                                            <a href="#">
-                                                <img src="assets/images/explore/person.png" alt="explore person">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incid ut labore et dolore magna aliqua....
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="explore-open-close-part">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <button class="close-btn open-btn" onclick="window.location.href='#'">open
-                                            now</button>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="explore-map-icon">
-                                            <a href="#"><i data-feather="map-pin"></i></a>
-                                            <a href="#"><i data-feather="upload"></i></a>
-                                            <a href="#"><i data-feather="heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="single-explore-item">
-                        <div class="single-explore-img">
-                            <img src="assets/images/explore/e6.jpg" alt="explore image">
-                            <div class="single-explore-img-info">
-                                <button onclick="window.location.href='#'">best rated</button>
-                                <div class="single-explore-image-icon-box">
-                                    <ul>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-arrows-alt"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="single-explore-image-icon">
-                                                <i class="fa fa-bookmark-o"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="single-explore-txt bg-theme-5">
-                            <h2><a href="#">thailand tour</a></h2>
-                            <p class="explore-rating-price">
-                                <span class="explore-rating">5.0</span>
-                                <a href="#"> 15 ratings</a>
-                                <span class="explore-price-box">
-                                    form
-                                    <span class="explore-price">5k$-10k$</span>
-                                </span>
-                                <a href="#">destination</a>
-                            </p>
-                            <div class="explore-person">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="explore-person-img">
-                                            <a href="#">
-                                                <img src="assets/images/explore/person.png" alt="explore person">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incid ut labore et dolore magna aliqua....
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="explore-open-close-part">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <button class="close-btn" onclick="window.location.href='#'">close
-                                            now</button>
-                                    </div>
-                                    <div class="col-sm-7">
-                                        <div class="explore-map-icon">
-                                            <a href="#"><i data-feather="map-pin"></i></a>
-                                            <a href="#"><i data-feather="upload"></i></a>
-                                            <a href="#"><i data-feather="heart"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!--/.container-->
-
 </section>
 <!--/.explore-->
 <!--explore end -->
@@ -605,269 +265,57 @@
 <!--reviews start -->
 <section id="reviews" class="reviews">
     <div class="section-header">
-        <h2>clients reviews</h2>
-        <p>What our client say about us</p>
+        <h2>Travellers Reviews</h2>
+        <p>What our Travellers say about events</p>
     </div>
     <!--/.section-header-->
     <div class="reviews-content">
+        {{-- {{dd($item)}} --}}
         <div class="testimonial-carousel">
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c1.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>Tom Leakar</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                @foreach ($reviews as $item)
+                <div class="single-testimonial-box">
+                    <div class="testimonial-description">
+                        <div class="testimonial-info">
+                            <div class="testimonial-img">
+                                <img src="{{$item->user_image}}" alt="{{$item->name}}"style='height:80px;width:80px;border-radius:50%'>
                             </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c2.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>monirul islam</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            <!--/.testimonial-img-->
+                            <div class="testimonial-person">
+                                <h2>{{$item->name}}</h2>
+                                <h4>{{$item->gender}} , EGY</h4>
+                                <div class="testimonial-person-star">
+                                    @if($item->stars > 0)
+                                    <i class="fa fa-star"></i>
+                                    @endif
+                                    @if($item->stars > 1)
+                                    <i class="fa fa-star"></i>
+                                    @endif
+                                    @if($item->stars > 2)
+                                    <i class="fa fa-star"></i>
+                                    @endif
+                                    @if($item->stars > 3)
+                                    <i class="fa fa-star"></i>
+                                    @endif
+                                    @if($item->stars > 4)
+                                    <i class="fa fa-star"></i>
+                                    @endif
+                                </div>
                             </div>
+                            <!--/.testimonial-person-->
                         </div>
-                        <!--/.testimonial-person-->
+                        <!--/.testimonial-info-->
+                        <div class="testimonial-comment">
+                            <p>
+                                 Review :{{$item->review}}
+                            </p>
+                        </div>
+                        <!--/.testimonial-comment-->
                     </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
+                    <!--/.testimonial-description-->
                 </div>
-                <!--/.testimonial-description-->
+
+                @endforeach
             </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c3.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>Shohrab Hossain</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c4.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>Tom Leakar</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c1.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>Tom Leakar</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c2.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>monirul islam</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c3.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>Shohrab Hossain</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-            <div class="single-testimonial-box">
-                <div class="testimonial-description">
-                    <div class="testimonial-info">
-                        <div class="testimonial-img">
-                            <img src="assets/images/clients/c4.png" alt="clients">
-                        </div>
-                        <!--/.testimonial-img-->
-                        <div class="testimonial-person">
-                            <h2>Tom Leakar</h2>
-                            <h4>london, UK</h4>
-                            <div class="testimonial-person-star">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <!--/.testimonial-person-->
-                    </div>
-                    <!--/.testimonial-info-->
-                    <div class="testimonial-comment">
-                        <p>
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum. Sed ut perspiciatis eaque.
-                        </p>
-                    </div>
-                    <!--/.testimonial-comment-->
-                </div>
-                <!--/.testimonial-description-->
-            </div>
-            <!--/.single-testimonial-box-->
-        </div>
     </div>
 
 </section>

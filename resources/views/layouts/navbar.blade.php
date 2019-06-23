@@ -2,7 +2,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
+<style>
+    .liy{
+        padding:0;
+        margin:0;
+    }
+</style>
 
 
         <!-- top-area Start -->
@@ -32,10 +37,10 @@
 			            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                         
                             @if(!Auth::check())
-                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-			                    <li class="scroll"><a href="" id="signinbtn">sign in</a></li>
-			                    <li class="scroll"><a href="" id="signupbtn">register</a></li>
-			                    <li class="select-opt" class="head-responsive-right pull-right">
+                            <ul class="nav navbar-nav navbar-right liy" data-in="fadeInDown" data-out="fadeOutUp">
+			                    <li class="liy scroll"><a href="" id="signinbtn">sign in</a></li>
+			                    <li class="liy scroll"><a href="" id="signupbtn">register</a></li>
+			                    <li class="liy select-opt" class="head-responsive-right pull-right">
 			                    	<select name="language" id="language">
 										<option value="default">EN</option>
 										<option value="Arabic">AR</option>
@@ -44,23 +49,24 @@
                             </ul><!--/.nav -->
                             @endif()
                             @if(Auth::check())
-                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class=" "><a  style="cursor:pointer" href="{{ url('/profile') }}" class="" >
+                            <ul style="margin:0 0 0 10px!important;padding:0!important" class=" nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                            <li style="margin:0 0 0 10px!important;padding:0!important"><a  style="margin:0 0 0 10px!important;padding:0!important;cursor:pointer" href="{{ url('/profile') }}" class="" >
                                 
-                                <span >
-                                <img class="explore-person-img" src="{{auth()->user()->user_image}}" alt="explore person">
+                                <span style="margin:0!important ;padding:0!important">
+                                {{-- <img style="margin:0!important ;padding:0!important" class=" explore-person-img" src="{{auth()->user()->user_image}}" alt="explore person"> --}}
                                 </span>
-                                <span style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a>
+                                <span style="margin:0!important ;padding:0!important" style="text-transform: lowercase; "></span>{{auth()->user()->name}}</a>
                               <!----  a d malhash lazma ana sheltaha mebawaza l shakl <a href="{{ url('/profile') }}" class="" ></a> --->
                             </li>
+                            <li style="margin:0 0 0 10px!important;padding:0!important;cursor:pointer"><a style="margin:0 0 0 10px!important;padding:0!important;cursor:pointer" href="/myevent">my events</li>
                                 <li>
                                         {{-- <a href="#" class="">
                                           <span class="glyphicon glyphicon-log-out"></span> "{{ url('/logout') }}" logout 
                                         </a> --}}
                                         
-                                        <a href="{{ url('/logout') }}" class="" > <span class="glyphicon glyphicon-log-out"></span> logout </a>
+                                        <a style="margin:0 0 0 10px!important;padding:0!important" href="{{ url('/logout') }}" class="" > <span class="glyphicon glyphicon-log-out"></span> logout </a>
                                 </li>
-                                <li class="select-opt" class="head-responsive-right pull-right">
+                                <li style="margin:0 0 0 10px!important;padding:0!important" class=" select-opt" class="head-responsive-right pull-right">
                                     <select name="language" id="language">
                                         <option value="default">EN</option>
                                         <option value="Arabic">AR</option>

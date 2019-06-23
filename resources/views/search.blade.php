@@ -399,9 +399,33 @@
         <div class="webHomeTitle">
           <h1 class="helpr-title">Let us help</h1>
         </div>
-        <div class="home-service clearfix">
-          <div class="wrapper-demo1">
-            <div id="dd1" class="wrapper-dropdown-3" tabindex="1">
+
+        <div class="welcome-hero-serch-box">
+            <div class="welcome-hero-form">
+
+                <div class="single-welcome-hero-form">
+                    <h3>location</h3>
+                    <form action="/search_event" method="POST">
+                        @csrf
+                        <input type="text" name="user_input" placeholder="Ex: london, newyork, rome" />                    
+                    <div class="welcome-hero-form-icon">
+                        <i class="flaticon-gps-fixed-indicator"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="welcome-hero-serch">
+                <button class="welcome-hero-btn"  type="submit" onclick=" "> 
+                    search <i data-feather="search"></i>
+                </button>
+            </form>
+            </div>
+        </div>
+
+
+
+        {{-- <div class="home-service clearfix">
+          <div class="wrapper-demo1"> --}}
+            {{-- <div id="dd1" class="wrapper-dropdown-3" tabindex="1">
                                                                 	<span class="active">Select City</span>
                                                                      <ul class="dropdown">
                                                                                        <li><a href="javascript:;" class="icon-menu " data-id="2" data-value="Bengaluru">Bengaluru</a></li>
@@ -431,10 +455,10 @@
                                            
 					                                               </ul>
                                     </div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
+          </div> --}}
+          {{-- <div class="clearfix"></div> --}}
+        {{-- </div>
+      </div> --}}
     </div>
   </div>
 </section>
@@ -477,7 +501,7 @@
 
     <hgroup class="mb20">
 		<h1>Search Results</h1>
-		<h2 class="lead"><strong class="text-danger">3</strong> results were found for the search for <strong class="text-danger">Lorem</strong></h2>								
+    <h2 class="lead"><strong class="text-danger">{{sizeof($array1   )}}</strong> results were found for the search for <strong class="text-danger">Lorem</strong></h2>								
 	</hgroup>
 
     <section class="col-xs-12 col-sm-6 col-md-12">
@@ -499,8 +523,15 @@
                 <h3><a href="#" title="{{$item->name}}">{{$item->name}}</a></h3>
                     <p><strong class="text-danger">description: </strong>{{$item->description}}</p>	
                     <br> 					
-                    <p><strong class="text-danger">Facility: </strong>{{$item->facility}}</p>						
-                    <span class="plus"><a href="/book_event?id={{$item->id}}" title="book" ><i class="glyphicon glyphicon-plus-sign"></i></a></span>
+                    <p><strong class="text-danger">Facility: </strong>{{$item->facility}}</p>
+                    @if(Auth::check())
+                    <form action="/book_event" method="POST">	
+                        <input type="hidden" name="id" value="{{$item->id}}">
+                        @csrf
+                        <button type="submit"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                    </form>				
+                    @endif
+                    {{-- <span class="plus"><a href="/book_event?id={{$item->id}}" title="book" ><i class="glyphicon glyphicon-plus-sign"></i></a></span> --}}
                     {{-- <span ><a href="/delete_event?id={{$item->id}}" title="delete"><i class="glyphicon glyphicon-trash"></i></a></span> --}}
                 </div>
                 <span class="clearfix borda"></span>
