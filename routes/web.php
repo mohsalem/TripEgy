@@ -39,6 +39,7 @@ Route::group(['namespace' => 'WEB'], function () {
         Route::get('/update_event_page', 'CompanyController@update_event_page');
         Route::post('/update_event', 'CompanyController@update_event');
         
+        Route::get('/delete_event', 'CompanyController@delete_event');
         Route::post('/delete_event', 'CompanyController@delete_event');
     // });
         
@@ -49,6 +50,7 @@ Route::group(['namespace' => 'WEB'], function () {
         Route::get('/home', 'UserController@index');
         Route::get('/profile', 'UserController@profile_user_page');
         Route::post('/update_user_info', 'UserController@update_user_info');
+        Route::get('/book_event', 'UserController@book_event');
         Route::post('/book_event', 'UserController@book_event');
         Route::post('/cancel_event', 'UserController@cancel_event');
         Route::post('/review_event', 'UserController@review_event');

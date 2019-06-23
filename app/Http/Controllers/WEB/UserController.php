@@ -173,10 +173,10 @@ class UserController extends Controller
 
     }
 
-    public function book_event( Request $reques)
+    public function book_event( Request $request)
     {
         $this->validate($request,[
-        'payment_method'=>'required',
+        'id'=>'required',
         // 'payment_status'=>'required',
             ]);
 
@@ -194,7 +194,7 @@ class UserController extends Controller
             $book_event = new Booking;
             $book_event->user_id = $user_id;
             $book_event->event_id = $event_id;
-            $book_event->payment_method = request('payment_method');
+            // $book_event->payment_method = request('payment_method');
             $book_event->booked=1; 
             $book_event->number_of_traviles=18; 
             $book_event->save();
@@ -210,7 +210,7 @@ class UserController extends Controller
         
     }
 
-    public function cancel_event( Request $reques)
+    public function cancel_event( Request $request)
     {
         // validation
         $validation= Validator::make($request->all(),[
@@ -321,8 +321,8 @@ class UserController extends Controller
     // }
 
     public function search_event_page()
-    {  
-        return view('search');
+    {   $array1=Event::where('visibility', 1 )->get();
+        return view('search',['array1'=>$array1]);
     }
     public function search_event( Request $reques)
     {

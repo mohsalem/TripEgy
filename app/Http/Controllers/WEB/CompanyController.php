@@ -26,7 +26,7 @@ class CompanyController extends Controller
     }
     public function home_page_for_company()
     {  
-        $array1=Event::get();
+        $array1=Event::where('visibility', 1 )->get();
         $array2=RatingCompany::get();
         return view('homeofcompany',['array1'=>$array1],['array2'=>$array2]);
 
@@ -167,71 +167,132 @@ class CompanyController extends Controller
     }
     
 
-    public function update_event_page(){
-        return view('updateEvent');
+    public function update_event_page( Request $request){
+        
+        $event = Event::where('id',request('id'))->first();
+
+        return view('updateEvent',['event'=>$event]);
     }
-    public function update_event( Request $reques)
+    public function update_event( Request $request)
     {
          // validation
-         $validation= Validator::make($request->all(),[
+         $this->validate($request,[
             
-            'name'=>'required',
-            'description'=>'required',
-            'from'=>'required',
-            'to'=>'required',
-            'deadline_date'=>'required',
-            'location'=>'required',
-            'location_name'=>'required',
-            'facility'=>'required',
-            'max_bookings'=>'required',
-            'photo'=>'required',
+            'id'=>'required',
+            'name'=>'',
+            'description'=>'',
+            'from'=>' ',
+            'to'=>' ',
+            'deadline_date'=>'',
+            'location'=>'',
+            'location_name'=>'',
+            'facility'=>'',
+            'max_bookings'=>'',
+            'photo'=>' ',
     
             ]);
-            if ($validation->fails()){
-                session()->flash('danger','The Event has not been updated successfully');
-                return redirect('/get_all_event');
-            }
+            
 
-            $event = Event::where('id',auth()->user()->id)->first();
+            $event = Event::where('id',request('id'))->first();
             $event_id = $event->id;
 
+
+            if (request('photo'))
+            {
+                $image = $request->file('photo'); //holding the inserted image 
+                $newimgname = uniqid().".".$image->getClientOriginalExtension();
+                $image->move('imgs/uploaded/',$newimgname);
+                $image_path= '/imgs/uploaded/'.$newimgname;
+                $event->photo = $image_path; 
+                $event->save();
+
+            }
+            if (request('name')){
+                $event->name = request('name');
+                $event->save();
+                
+            }
+            if (request('description')){
+                $event->description = request('description');
+                $event->save();
+                
+            }
+            if (request('from')){
+                $event->from = (request('from'));
+                $event->save();
+                
+            }
+            if (request('to')){
+                $event->to = request('to');
+                $event->save();
+                
+            }
+            if (request('deadline_date')){
+                $event->deadline_date = request('deadline_date');
+                $event->save();
+                
+            }
+            if(request('location')){
+                $event->birthdate = request('location');
+                $event->save();
+                
+            }
+            if(request('location_name')){
+                $event->birthdate = request('location_name');
+                $event->save();
+                
+            }
+            if(request('facility')){
+                $event->facility = request('facility');
+                $event->save();
+                
+            }
+            if(request('max_bookings')){
+                $event->max_bookings = request('max_bookings');
+                $event->save();
+                
+            }
             // $id = request('id');
             // $update_event = Event::find($id);
-            $update_event->name=request('name');
-            $update_event->description = request('description');
-            $update_event->from = request('from');
-            $update_event->to = request('to');
-            $update_event->deadline_date = request('deadline_date');
-            $update_event->location = request('location');
-            $update_event->location_name = request('location_name');
-            $update_event->facility = request('facility');
-            $update_event->photo = request('photo');
-            $update_event->max_bookings = request('max_bookings');
-            $update_event->save();
+            // $image = $request->file('photo'); //holding the inserted image 
+            // $newimgname = uniqid().".".$image->getClientOriginalExtension();
+            // $image->move('imgs/uploaded/',$newimgname);
+            // $image_path= '/imgs/uploaded/'.$newimgname;
+            // $update_event->photo = $image_path; 
+            // $update_event->name=request('name');
+            // $update_event->description = request('description');
+            // $update_event->from = request('from');
+            // $update_event->to = request('to');
+            // $update_event->deadline_date = request('deadline_date');
+            // $update_event->location = request('location');
+            // $update_event->location_name = request('location_name');
+            // $update_event->facility = request('facility');
+            // $update_event->max_bookings = request('max_bookings');
+            // $event->save();
     
             session()->flash('success','The Event has been updated successfully');
-            return redirect('/get_all_event');
+            return redirect('/homeofcompany');
     
 
     }
    
-    public function delete_event( Request $reques)
+    public function delete_event( Request $request)
     {
         // validation
-        $validation= Validator::make($request->all(),[
-        'id'=>'required',
-        ]);
-        if ($validation->fails()){
-        return back();
-        }
+        // $this->validate($request,[
+        // 'id'=>'required'
+        // ]);
+        // if ($validation->fails()){
+        //     return back();
+        // }
+        // dd(request('id'));
         $delete_event = Event::where('id',request('id'))->first();
+        // dd(request($delete_event));
         if($delete_event != null){
-        // $delete_event->delete();
-        $id = request('id');
-        $delete_event = Event::find($id);
+
         $delete_event->visibility =0;
         $delete_event->save();
-        // session()->
+
         session()->flash('success','The Event has been deleted successfully');
         return back();
         }else{

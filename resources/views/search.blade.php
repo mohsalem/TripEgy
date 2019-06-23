@@ -481,25 +481,33 @@
 	</hgroup>
 
     <section class="col-xs-12 col-sm-6 col-md-12">
-		<article class="search-result row">
-			<div class="col-xs-12 col-sm-12 col-md-3">
-				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/people" alt="Lorem ipsum" /></a>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-2">
-				<ul class="meta-search">
-					<li><i class="glyphicon glyphicon-calendar"></i> <span>02/15/2014</span></li>
-					<li><i class="glyphicon glyphicon-time"></i> <span>4:28 pm</span></li>
-					<li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
-				<h3><a href="#" title="">Voluptatem, exercitationem, suscipit, distinctio</a></h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, exercitationem, suscipit, distinctio, qui sapiente aspernatur molestiae non corporis magni sit sequi iusto debitis delectus doloremque.</p>						
-                <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
-			</div>
-			<span class="clearfix borda"></span>
-		</article>
-
+            @foreach ($array1 as $item)
+            <article class="search-result row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <a href="#" title="{{$item->name}}" class=""><img src={{$item->photo}} alt="{{$item->name}}" style="height= 150px"></a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="glyphicon glyphicon-map-marker danger"></i><strong class="text-danger"> location</strong><span> {{$item->location}} </span></li>
+                        <li><i class="glyphicon glyphicon-calendar danger"></i><strong class="text-danger"> From </strong><span>{{$item->from}}</span></li>
+                        <li><i class="glyphicon glyphicon-calendar danger"></i><strong class="text-danger"> To </strong><span>{{$item->to}} </span></li>
+                        <li><i class="glyphicon glyphicon-calendar danger"></i><strong class="text-danger"> Deadline </strong><span>{{$item->deadline_date}} </span></li>
+                        <li><i class="glyphicon glyphicon-user danger"></i><strong class="text-danger"> maximum travellers</strong><span> {{$item->max_bookings}} </span></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                <h3><a href="#" title="{{$item->name}}">{{$item->name}}</a></h3>
+                    <p><strong class="text-danger">description: </strong>{{$item->description}}</p>	
+                    <br> 					
+                    <p><strong class="text-danger">Facility: </strong>{{$item->facility}}</p>						
+                    <span class="plus"><a href="/book_event?id={{$item->id}}" title="book" ><i class="glyphicon glyphicon-plus-sign"></i></a></span>
+                    {{-- <span ><a href="/delete_event?id={{$item->id}}" title="delete"><i class="glyphicon glyphicon-trash"></i></a></span> --}}
+                </div>
+                <span class="clearfix borda"></span>
+            </article>
+            
+            @endforeach
+{{-- 
         <article class="search-result row">
 			<div class="col-xs-12 col-sm-12 col-md-3">
 				<a href="#" title="Lorem ipsum" class="thumbnail"><img src="http://lorempixel.com/250/140/food" alt="Lorem ipsum" /></a>
@@ -536,7 +544,7 @@
                 <span class="plus"><a href="#" title="Lorem ipsum"><i class="glyphicon glyphicon-plus"></i></a></span>
 			</div>
 			<span class="clearfix border"></span>
-		</article>			
+		</article>			 --}}
 
 	</section>
 </div>

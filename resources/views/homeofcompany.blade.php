@@ -19,7 +19,7 @@
     <form class="form-inline">
         @csrf
         <div class="form-group">
-            <button id="Add-photos-to-gallery-button" type="button" class="btn btn-primary btn-lg">
+            {{-- <button id="Add-photos-to-gallery-button" type="button" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-picture"></i>
                 <a href="{{ url('/homeofcompany') }}"></a>
                 Add photos to gallery
@@ -32,12 +32,12 @@
             <button id=" Edit-description-button" type="button" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-edit"></i>
                 Edit description
-            </button>
+            </button> --}}
             
             <a href="{{url('/create_event_page')}}">
             <button id="add-event-button" type="button" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-plus"></i>
-               Add event             
+               Add New Event             
                
             {{-- </button></a>   
             <a href="{{url('/allevent_page')}}">
@@ -463,11 +463,11 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
             <h3><a href="#" title="{{$item->name}}">{{$item->name}}</a></h3>
-                <p>{{$item->description}}</p>	
+                <p><strong class="text-danger">description: </strong>{{$item->description}}</p>	
                 <br> 					
-				<p>{{$item->facility}}</p>						
-                <span class="plus"><a href="#" title="edit" ><i class="glyphicon glyphicon-pencil"></i></a></span>
-                <span class="trash"><a href="#" title="delete"><i class="glyphicon glyphicon-trash"></i></a></span>
+				<p><strong class="text-danger">Facility: </strong>{{$item->facility}}</p>						
+                <span class="plus"><a href="/update_event_page?id={{$item->id}}" title="edit" ><i class="glyphicon glyphicon-pencil"></i></a></span>
+                <span ><a href="/delete_event?id={{$item->id}}" title="delete"><i class="glyphicon glyphicon-trash"></i></a></span>
 			</div>
 			<span class="clearfix borda"></span>
 		</article>
