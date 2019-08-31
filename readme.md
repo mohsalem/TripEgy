@@ -11,6 +11,10 @@
     - CSS
     - Javascript
     
+ - Website screenshots:
+     - https://imgur.com/JMaBzMK
+     - https://imgur.com/ngLJJz0
+     - https://imgur.com/SrfucM3
     
     
     
