@@ -1,11 +1,19 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## About Tripegy
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+- Allows tourists interested in visiting Egypt to use an all-in-one website that lets them brows and compare trips prices filtering by category and location in Egypt
+- Full website smooth automated experience where they can sign up, find trips and pay online in minutes without interactions with the travel agency.
+- Responsible for designing UI and UX for a travel agencies listing website
+- Responsible for managing, designing a work plan and assigning tasks to a team of 3 people
+- implemented using:
+    - Laravel (php framework)
+    - Bootstrap (css framework)
+    - html 
+    - CSS
+    - Javascript
+    
+    
+    
+    
 
 ## About Laravel
 
